@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://b4djmdjhpu8du"]
+[gd_scene load_steps=3 format=3 uid="uid://b4djmdjhpu8du"]
 
 [ext_resource type="PackedScene" uid="uid://co182m20os0b6" path="res://nodes/dialog_text/dialog_text_node.tscn" id="1_2tfvy"]
+[ext_resource type="PackedScene" uid="uid://l1hq7y6bnxic" path="res://nodes/choice_prompt/choice_prompt_node.tscn" id="2_cdros"]
 
 [node name="UITest" type="Control"]
 layout_mode = 3
@@ -33,3 +34,11 @@ offset_top = 265.0
 offset_right = 569.0
 offset_bottom = 352.0
 position_offset = Vector2(296, 265)
+
+[node name="ChoicePromptNode" parent="DialogGraphEditor/GraphEdit" instance=ExtResource("2_cdros")]
+layout_mode = 0
+offset_left = 642.0
+offset_top = 183.0
+offset_right = 1043.0
+offset_bottom = 270.0
+position_offset = Vector2(642, 183)

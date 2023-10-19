@@ -25,4 +25,4 @@ project/assembly_name="ne5-dialog-graph-test"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/netengine5/net.bobbo.knowledge/plugin.cfg")
+enabled=PackedStringArray("res://addons/netengine5/net.bobbo.character/plugin.cfg", "res://addons/netengine5/net.bobbo.knowledge/plugin.cfg")

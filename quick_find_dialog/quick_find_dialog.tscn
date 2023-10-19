@@ -1,0 +1,43 @@
+[gd_scene load_steps=4 format=3 uid="uid://cfekg614yldtd"]
+
+[ext_resource type="Script" path="res://quick_find_dialog/quick_find_dialog.gd" id="1_im04y"]
+[ext_resource type="Texture2D" uid="uid://cg1yjswmf8wif" path="res://sprites/search_icon.png" id="2_nvtnm"]
+[ext_resource type="Script" path="res://quick_find_dialog/resource_search_list.gd" id="3_463o1"]
+
+[node name="QuickFindDialog" type="ConfirmationDialog"]
+title = "Quick Find..."
+initial_position = 4
+size = Vector2i(500, 300)
+ok_button_text = "Load"
+script = ExtResource("1_im04y")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -49.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SearchBar" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/SearchBar"]
+layout_mode = 2
+text = "Search:"
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer/SearchBar"]
+texture_filter = 1
+layout_mode = 2
+right_icon = ExtResource("2_nvtnm")
+
+[node name="ResourceSearchList" type="ItemList" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("3_463o1")
+
+[connection signal="text_changed" from="VBoxContainer/SearchBar/LineEdit" to="VBoxContainer/ResourceSearchList" method="set_search_query"]
+[connection signal="item_selected" from="VBoxContainer/ResourceSearchList" to="." method="_on_resource_search_list_item_selected"]

@@ -5,6 +5,7 @@ extends HBoxContainer
 #
 
 signal target_resource_updated(resource: Resource)
+@export var quick_find_dialog: QuickFindDialog
 
 #
 #	Private Variables
@@ -54,7 +55,7 @@ func set_target_resource(resource: Resource) -> void:
 func _on_menu_button_id_pressed(id: int):
 	match(id):
 		QUICK_FIND_ID:
-			$CharacterQuickFindDialog.show()
+			quick_find_dialog.show()
 		LOAD_ID:
 			return
 		CLEAR_ID:
@@ -64,5 +65,5 @@ func _on_arrow_button_pressed():
 	$MenuButton.show_popup()
 
 
-func _on_character_quick_find_dialog_confirmed_path(path):
+func _on_quick_find_dialog_confirmed_path(path):
 	set_target_resource(load(path))

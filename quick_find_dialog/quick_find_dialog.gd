@@ -29,6 +29,9 @@ func _ready():
 	confirmed.connect(_on_confirmed.bind())
 	get_ok_button().disabled = true
 	
+	# Wait for the root node of this scene to be ready.
+	# We do this so parent nodes have a chance to override
+	# our search_list_scene variable :3
 	await get_tree().root.ready
 	
 	# Spawn the search list and connect it to us

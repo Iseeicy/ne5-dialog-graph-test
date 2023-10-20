@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="KnowledgeBool" load_steps=2 format=3 uid="uid://dfk777744hlqh"]
+
+[ext_resource type="Script" path="res://addons/netengine5/net.bobbo.knowledge/knowledge_resources/knowledge_bool.gd" id="1_unkol"]
+
+[resource]
+script = ExtResource("1_unkol")
+default_value = false

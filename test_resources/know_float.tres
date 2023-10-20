@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="KnowledgeFloat" load_steps=2 format=3 uid="uid://cyhqstd4qrdqi"]
+
+[ext_resource type="Script" path="res://addons/netengine5/net.bobbo.knowledge/knowledge_resources/knowledge_float.gd" id="1_edtkh"]
+
+[resource]
+script = ExtResource("1_edtkh")
+default_value = 0.0

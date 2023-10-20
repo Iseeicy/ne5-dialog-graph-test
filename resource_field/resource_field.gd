@@ -5,7 +5,9 @@ extends HBoxContainer
 #
 
 signal target_resource_updated(resource: Resource)
-@export var quick_find_dialog: QuickFindDialog
+
+## The scene to use for the quick-find dialog's resource list.
+@export var search_list_scene: PackedScene = preload("res://quick_find_dialog/resource_search_list.tscn")
 
 #
 #	Private Variables
@@ -23,6 +25,7 @@ var _target_resource: Resource = null
 
 func _ready():
 	$MenuButton.get_popup().id_pressed.connect(_on_menu_button_id_pressed.bind())
+	$QuickFindDialog.search_list_scene = search_list_scene
 
 #
 #	Public Functions
@@ -55,7 +58,7 @@ func set_target_resource(resource: Resource) -> void:
 func _on_menu_button_id_pressed(id: int):
 	match(id):
 		QUICK_FIND_ID:
-			quick_find_dialog.show()
+			$QuickFindDialog.show()
 		LOAD_ID:
 			return
 		CLEAR_ID:

@@ -1,11 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://bbg1cob3e3bae"]
+[gd_scene load_steps=5 format=3 uid="uid://dg37jnk72yyc8"]
 
-[ext_resource type="Script" path="res://resource_field/resource_field.gd" id="1_bypwj"]
-[ext_resource type="Texture2D" uid="uid://1pmj4j14vax" path="res://sprites/down_arrow.png" id="2_ofexl"]
-[ext_resource type="PackedScene" uid="uid://cfekg614yldtd" path="res://quick_find_dialog/quick_find_dialog.tscn" id="3_msf4f"]
+[ext_resource type="Script" path="res://resource_field/resource_field.gd" id="1_5fvey"]
+[ext_resource type="PackedScene" uid="uid://dsh4d2j8tjfij" path="res://quick_find_dialog/character_definition_search_list.tscn" id="2_pgoqk"]
+[ext_resource type="Texture2D" uid="uid://1pmj4j14vax" path="res://sprites/down_arrow.png" id="2_xpqya"]
+[ext_resource type="PackedScene" uid="uid://cfekg614yldtd" path="res://quick_find_dialog/quick_find_dialog.tscn" id="3_kdusa"]
 
-[node name="ResourceField" type="HBoxContainer"]
-script = ExtResource("1_bypwj")
+[node name="CharacterDefResourceField" type="HBoxContainer"]
+script = ExtResource("1_5fvey")
+search_list_scene = ExtResource("2_pgoqk")
 
 [node name="MenuButton" type="MenuButton" parent="."]
 layout_mode = 2
@@ -29,11 +31,11 @@ ok_button_text = "Open"
 texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 8
-icon = ExtResource("2_ofexl")
+icon = ExtResource("2_xpqya")
 flat = true
 icon_alignment = 1
 
-[node name="QuickFindDialog" parent="." instance=ExtResource("3_msf4f")]
+[node name="QuickFindDialog" parent="." instance=ExtResource("3_kdusa")]
 
 [connection signal="pressed" from="ArrowButton" to="." method="_on_arrow_button_pressed"]
 [connection signal="confirmed_path" from="QuickFindDialog" to="." method="_on_quick_find_dialog_confirmed_path"]

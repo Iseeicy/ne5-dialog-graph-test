@@ -89,6 +89,11 @@ func _file_matches_search(absolute_path: String, query: String) -> bool:
 #
 #	Virtual Functions
 #
-	
+
+## Is the given resource the right class type?
+## We need to make this a virtual function because for SOME
+## reason, Godot doesn't expose custom resource class names
+## when getting the class for a resource - but it DOES work
+## with the `is` keyword. Buh.
 func _is_resource_correct_type(resource) -> bool:
 	return resource is Resource

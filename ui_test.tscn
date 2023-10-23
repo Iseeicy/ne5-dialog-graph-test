@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://b4djmdjhpu8du"]
+[gd_scene load_steps=8 format=3 uid="uid://b4djmdjhpu8du"]
 
 [ext_resource type="PackedScene" uid="uid://co182m20os0b6" path="res://nodes/dialog_text/dialog_text_node.tscn" id="1_2tfvy"]
+[ext_resource type="Script" path="res://dialog_graph_editor.gd" id="1_x54wc"]
 [ext_resource type="PackedScene" uid="uid://l1hq7y6bnxic" path="res://nodes/choice_prompt/choice_prompt_node.tscn" id="2_cdros"]
 [ext_resource type="PackedScene" uid="uid://cnfwhuon6lt30" path="res://nodes/change_character/change_character_node.tscn" id="3_bkkvt"]
 [ext_resource type="PackedScene" uid="uid://byp3w5m5dfvvv" path="res://nodes/forwarder/forwarder_node.tscn" id="4_s8kws"]
 [ext_resource type="PackedScene" uid="uid://bcbts4oynusld" path="res://nodes/knowledge_action/knowledge_action_node.tscn" id="5_6oihm"]
+[ext_resource type="Script" path="res://right_click_menu.gd" id="8_htwaf"]
 
 [node name="UITest" type="Control"]
 layout_mode = 3
@@ -14,48 +16,33 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="DialogGraphEditor" type="Control" parent="."]
+[node name="DialogGraphEditor" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_x54wc")
+node_scenes = Array[PackedScene]([ExtResource("3_bkkvt"), ExtResource("2_cdros"), ExtResource("1_2tfvy"), ExtResource("4_s8kws"), ExtResource("5_6oihm")])
 
 [node name="GraphEdit" type="GraphEdit" parent="DialogGraphEditor"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
+size_flags_vertical = 3
+right_disconnects = true
 
-[node name="DialogTextNode" parent="DialogGraphEditor/GraphEdit" instance=ExtResource("1_2tfvy")]
-layout_mode = 0
-offset_left = 296.0
-offset_top = 265.0
-offset_right = 569.0
-offset_bottom = 352.0
-position_offset = Vector2(296, 265)
+[node name="TODO - Create knowledge junction resource, then a node for those" type="Node" parent="DialogGraphEditor/GraphEdit"]
 
-[node name="ChoicePromptNode" parent="DialogGraphEditor/GraphEdit" instance=ExtResource("2_cdros")]
-layout_mode = 0
-offset_left = 642.0
-offset_top = 183.0
-offset_right = 1043.0
-offset_bottom = 270.0
-position_offset = Vector2(642, 183)
+[node name="RightClickMenu" type="PopupMenu" parent="DialogGraphEditor"]
+size = Vector2i(28, 8)
+submenu_popup_delay = 0.2
+script = ExtResource("8_htwaf")
 
-[node name="ChangeCharacterNode" parent="DialogGraphEditor/GraphEdit" instance=ExtResource("3_bkkvt")]
-layout_mode = 0
-offset_left = 45.0
-offset_top = 391.0
-offset_right = 345.0
-offset_bottom = 504.0
-position_offset = Vector2(45, 391)
-
-[node name="ForwarderNode" parent="DialogGraphEditor/GraphEdit" instance=ExtResource("4_s8kws")]
-layout_mode = 0
-
-[node name="KnowledgeActionNode" parent="DialogGraphEditor/GraphEdit" instance=ExtResource("5_6oihm")]
-layout_mode = 0
+[connection signal="chose_node_scenes" from="DialogGraphEditor" to="DialogGraphEditor/RightClickMenu" method="_on_dialog_graph_editor_chose_node_scenes"]
+[connection signal="connection_from_empty" from="DialogGraphEditor/GraphEdit" to="DialogGraphEditor/RightClickMenu" method="_on_graph_edit_connection_from_empty"]
+[connection signal="connection_request" from="DialogGraphEditor/GraphEdit" to="DialogGraphEditor" method="_on_graph_edit_connection_request"]
+[connection signal="connection_to_empty" from="DialogGraphEditor/GraphEdit" to="DialogGraphEditor/RightClickMenu" method="_on_graph_edit_connection_to_empty"]
+[connection signal="delete_nodes_request" from="DialogGraphEditor/GraphEdit" to="DialogGraphEditor" method="_on_graph_edit_delete_nodes_request"]
+[connection signal="disconnection_request" from="DialogGraphEditor/GraphEdit" to="DialogGraphEditor" method="_on_graph_edit_disconnection_request"]
+[connection signal="popup_request" from="DialogGraphEditor/GraphEdit" to="DialogGraphEditor/RightClickMenu" method="_on_graph_edit_popup_request"]
+[connection signal="spawn_node" from="DialogGraphEditor/RightClickMenu" to="DialogGraphEditor" method="_on_add_node_spawn_node"]

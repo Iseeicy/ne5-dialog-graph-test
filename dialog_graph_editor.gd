@@ -92,8 +92,7 @@ func load_from_resource(dialog_graph: DialogGraph) -> void:
 			
 		# Spawn the control, add it to the dict, and make it represent
 		# this data
-		var control: DialogGraphNode = data.get_control_scene().instantiate()
-		$GraphEdit.add_child(control)
+		var control: DialogGraphNode = _spawn_node(data.get_control_scene())
 		control.position_offset = data.position
 		control_by_id[id] = control
 		control.set_node_data(data)
@@ -130,17 +129,8 @@ func _is_node_port_connected(node_name: String, port: int) -> bool:
 		return true
 	return false
 
-#
-#	Signals
-#
-
-func _on_add_node_spawn_node(scene: PackedScene):
-	var new_node: GraphNode = scene.instantiate()
-	
-	# Update position to be middle of screen
-	new_node.position_offset = $GraphEdit.scroll_offset
-	new_node.position_offset += $GraphEdit.size / 2
-	new_node.position_offset /= $GraphEdit.zoom
+func _spawn_node(node_scene: PackedScene) -> GraphNode:
+	var new_node: GraphNode = node_scene.instantiate()
 	
 	# Tell the node to call our classes function when it wants
 	# to be removed.
@@ -148,9 +138,21 @@ func _on_add_node_spawn_node(scene: PackedScene):
 		delete_node(new_node)
 	new_node.close_request.connect(close_this_node.bind())
 	
-	
 	$GraphEdit.add_child(new_node)
+	return new_node
 
+#
+#	Signals
+#
+
+func _on_add_node_spawn_node(scene: PackedScene):
+	var new_node: GraphNode = _spawn_node(scene)
+	
+	# Update position to be middle of screen
+	new_node.position_offset = $GraphEdit.scroll_offset
+	new_node.position_offset += $GraphEdit.size / 2
+	new_node.position_offset /= $GraphEdit.zoom
+	
 func _on_graph_edit_delete_nodes_request(nodes):
 	for node_name in nodes:
 		delete_node($GraphEdit.get_node(node_name as NodePath))

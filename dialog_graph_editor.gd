@@ -34,6 +34,18 @@ func _ready():
 #
 
 func delete_node(node: GraphNode):
+	var connections_to_remove = []
+	
+	# Save all connections that reference this node. conn is in the form of
+	# { from_port: 0, from: "GraphNode name 0", to_port: 1, to: "GraphNode name 1" }.
+	for conn in $GraphEdit.get_connection_list():
+		if conn.from == node.name or conn.to == node.name:
+			connections_to_remove.push_back(conn)
+			
+	# Actually remove all of those saved connections
+	for conn in connections_to_remove:
+		$GraphEdit.disconnect_node(conn.from, conn.from_port, conn.to, conn.to_port)
+	
 	node.queue_free()
 
 func save_to_resource(dialog_graph: DialogGraph) -> void:

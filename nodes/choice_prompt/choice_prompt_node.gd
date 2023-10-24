@@ -32,7 +32,7 @@ func set_node_data(data: GraphNodeData) -> bool:
 		_free_option_control(option)
 	_choice_options.clear()	
 	
-	for choice in _data.choice_prompt.choices:
+	for choice in _data.choices:
 		var new_option = _new_option_control()
 		_choice_options.push_back(new_option)
 		new_option.set_text(choice)
@@ -50,7 +50,7 @@ func _update_size():
 func _add_new_option() -> void:
 	var new_option = _new_option_control()
 	_choice_options.push_back(new_option)	
-	_data.choice_prompt.choices.push_back("")
+	_data.choices.push_back("")
 
 func _remove_last_option() -> void:
 	if _choice_options.size() == 0:
@@ -58,13 +58,13 @@ func _remove_last_option() -> void:
 
 	var old_option = _choice_options.pop_back()
 	_free_option_control(old_option)
-	_data.choice_prompt.choices.pop_back()
+	_data.choices.pop_back()
 	
 func _new_option_control() -> ChoicePromptOptionContainer:
 	var new_option = choice_option_scene.instantiate()
 	add_child(new_option)
 	
-	var this_index = _choice_options.size() - 1
+	var this_index = _choice_options.size()
 	new_option.setup(this_index)
 	set_slot(this_index + 1, false, 0, Color.CYAN, true, 0, Color.YELLOW)
 	
@@ -107,4 +107,4 @@ func _on_settings_visibility_changed(_is_visible: bool):
 	_update_size()
 	
 func _on_text_changed(index: int, new_text: String) -> void:
-	_data.choice_prompt.choices[index] = new_text
+	_data.choices[index] = new_text

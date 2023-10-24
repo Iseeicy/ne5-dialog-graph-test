@@ -1,6 +1,7 @@
 extends Control
 
-
+func _ready():
+	$DialogGraphEditor.load_from_resource(DialogGraph.new())
 
 
 func _on_save_button_pressed():

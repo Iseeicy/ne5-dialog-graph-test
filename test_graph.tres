@@ -1,49 +1,37 @@
-[gd_resource type="Resource" script_class="DialogGraph" load_steps=11 format=3]
+[gd_resource type="Resource" script_class="DialogGraph" load_steps=9 format=3]
 
-[ext_resource type="Script" path="res://nodes/dialog_text/dialog_text_node_data.gd" id="1_1u6qn"]
-[ext_resource type="Script" path="res://nodes/choice_prompt/choice_prompt_node_data.gd" id="2_bb3e4"]
-[ext_resource type="Script" path="res://dialog_graph.gd" id="3_61pf8"]
-[ext_resource type="Script" path="res://nodes/forwarder/forwarder_node_data.gd" id="3_gmjlh"]
+[ext_resource type="Script" path="res://nodes/entry/entry_node_data.gd" id="1_ng0mn"]
+[ext_resource type="Script" path="res://nodes/dialog_text/dialog_text_node_data.gd" id="2_aupnn"]
+[ext_resource type="Script" path="res://nodes/choice_prompt/choice_prompt_node_data.gd" id="3_iik4j"]
+[ext_resource type="Script" path="res://dialog_graph.gd" id="4_b71q4"]
 
-[sub_resource type="Resource" id="Resource_mr1kn"]
-script = ExtResource("1_1u6qn")
-text = Array[String](["Hello world!", "How are you?"])
-position = Vector2(120, 160)
+[sub_resource type="Resource" id="Resource_jh0qu"]
+script = ExtResource("1_ng0mn")
+position = Vector2(0, 0)
 
-[sub_resource type="Resource" id="Resource_f8ee4"]
-script = ExtResource("2_bb3e4")
+[sub_resource type="Resource" id="Resource_5q4ki"]
+script = ExtResource("2_aupnn")
+text = Array[String](["What would you like to do?"])
+position = Vector2(0, 200)
+
+[sub_resource type="Resource" id="Resource_yvou1"]
+script = ExtResource("3_iik4j")
 text = ""
-choices = Array[String](["Good!", "...what was the question...?", "(ignore them)"])
-position = Vector2(440, 260)
+choices = Array[String](["Test dialog!", "Do something else", "Nothing!"])
+position = Vector2(0, 340)
 
-[sub_resource type="Resource" id="Resource_dc4e0"]
-script = ExtResource("1_1u6qn")
-text = Array[String](["Great!", "Yummy!"])
-position = Vector2(1000, 140)
-
-[sub_resource type="Resource" id="Resource_62ofa"]
-script = ExtResource("1_1u6qn")
-text = Array[String](["....", "...I SAID..."])
-position = Vector2(880, 660)
-
-[sub_resource type="Resource" id="Resource_ow7ff"]
-script = ExtResource("1_1u6qn")
-text = Array[String](["Hello???", "...anyone there????"])
-position = Vector2(360, 640)
-
-[sub_resource type="Resource" id="Resource_bxtuy"]
-script = ExtResource("3_gmjlh")
-position = Vector2(1480, 300)
+[sub_resource type="Resource" id="Resource_twnpj"]
+script = ExtResource("2_aupnn")
+text = Array[String](["Good news!", "That's what ur doing. Nerd."])
+position = Vector2(600, 200)
 
 [resource]
-script = ExtResource("3_61pf8")
+script = ExtResource("4_b71q4")
 all_nodes = {
-1: SubResource("Resource_mr1kn"),
-2: SubResource("Resource_f8ee4"),
-3: SubResource("Resource_dc4e0"),
-4: SubResource("Resource_62ofa"),
-5: SubResource("Resource_ow7ff"),
-6: SubResource("Resource_bxtuy")
+1: SubResource("Resource_jh0qu"),
+2: SubResource("Resource_5q4ki"),
+3: SubResource("Resource_yvou1"),
+4: SubResource("Resource_twnpj")
 }
 connections = Array[Dictionary]([{
 "from_id": 1,
@@ -56,28 +44,8 @@ connections = Array[Dictionary]([{
 "to_id": 3,
 "to_port": 0
 }, {
-"from_id": 2,
-"from_port": 1,
-"to_id": 4,
-"to_port": 0
-}, {
-"from_id": 4,
-"from_port": 0,
-"to_id": 1,
-"to_port": 0
-}, {
-"from_id": 2,
-"from_port": 2,
-"to_id": 5,
-"to_port": 0
-}, {
-"from_id": 5,
-"from_port": 0,
-"to_id": 2,
-"to_port": 0
-}, {
 "from_id": 3,
 "from_port": 0,
-"to_id": 6,
+"to_id": 4,
 "to_port": 0
 }])

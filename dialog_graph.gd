@@ -6,7 +6,9 @@ class_name DialogGraph
 #
 
 ## All of the nodes in the graph, stored by ID (int -> GraphNodeData)
-@export var all_nodes: Dictionary = {}
+@export var all_nodes: Dictionary = {
+	0: EntryNodeData.new()
+}
 
 ## A list of connections between the nodes in the graph in the form of
 ## { "from_id": int, "from_port": int, "to_id": int, "to_port": int }
@@ -16,7 +18,7 @@ class_name DialogGraph
 #	Private Variables
 #
 
-var _last_id: int = -1
+var _last_id: int = 0
 
 #
 #	Public Functions

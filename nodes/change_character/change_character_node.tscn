@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cnfwhuon6lt30"]
+[gd_scene load_steps=3 format=3 uid="uid://cnfwhuon6lt30"]
 
 [ext_resource type="PackedScene" uid="uid://dg37jnk72yyc8" path="res://resource_field/character_def_resource_field.tscn" id="1_8f12q"]
+[ext_resource type="Script" path="res://nodes/change_character/change_character_node.gd" id="1_ytoo5"]
 
 [node name="ChangeCharacterNode" type="GraphNode"]
 offset_left = 422.0
@@ -29,6 +30,7 @@ slot/1/right_type = 0
 slot/1/right_color = Color(1, 1, 1, 1)
 slot/1/right_icon = null
 slot/1/draw_stylebox = true
+script = ExtResource("1_ytoo5")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 2
@@ -36,3 +38,5 @@ text = "Character:"
 
 [node name="CharacterDefResourceField" parent="." instance=ExtResource("1_8f12q")]
 layout_mode = 2
+
+[connection signal="target_resource_updated" from="CharacterDefResourceField" to="." method="_on_character_def_resource_field_target_resource_updated"]

@@ -1,4 +1,4 @@
-extends GraphNode
+extends DialogGraphNode
 
 #
 #	Godot Functions

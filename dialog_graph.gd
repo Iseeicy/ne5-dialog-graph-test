@@ -8,6 +8,10 @@ class_name DialogGraph
 ## All of the nodes in the graph, stored by ID (int -> GraphNodeData)
 @export var all_nodes: Dictionary = {}
 
+## A list of connections between the nodes in the graph in the form of
+## { "from_id": int, "from_port": int, "to_id": int, "to_port": int }
+@export var connections: Array[Dictionary] = []
+
 #
 #	Private Variables
 #
@@ -15,8 +19,43 @@ class_name DialogGraph
 var _last_id: int = -1
 
 #
+#	Public Functions
+#
+
+func clear() -> void:
+	all_nodes.clear()
+	connections.clear()
+	_last_id = -1
+
+func add_node(data: GraphNodeData) -> int:
+	var new_id = _get_next_id()
+	all_nodes[new_id] = data
+	return new_id
+
+func contains_id(id: int) -> bool:
+	return id in all_nodes
+
+func connect_nodes(from_id: int, from_port: int, to_id: int, to_port: int) -> bool:
+	if not contains_id(from_id) or not contains_id(to_id):
+		return false
+		
+	var connection = _create_connection_dict(from_id, from_port, to_id, to_port)
+	connections.push_back(connection)
+		
+	return true
+	
+
+#
 #	Private Functions
 #
+
+func _create_connection_dict(from_id: int, from_port: int, to_id: int, to_port: int) -> Dictionary:
+	return {
+		"from_id": from_id,
+		"from_port": from_port,
+		"to_id": to_id,
+		"to_port": to_port
+	}
 
 func _init_last_id() -> int:
 	if all_nodes.size() > 0:

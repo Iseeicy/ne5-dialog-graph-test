@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://byp3w5m5dfvvv"]
+[gd_scene load_steps=2 format=3 uid="uid://byp3w5m5dfvvv"]
+
+[ext_resource type="Script" path="res://nodes/forwarder/forwarder_node.gd" id="1_3h0vu"]
 
 [node name="ForwarderNode" type="GraphNode"]
 offset_left = 493.0
@@ -18,6 +20,7 @@ slot/0/right_type = 0
 slot/0/right_color = Color(1, 1, 0, 1)
 slot/0/right_icon = null
 slot/0/draw_stylebox = true
+script = ExtResource("1_3h0vu")
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 2

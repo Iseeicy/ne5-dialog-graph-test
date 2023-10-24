@@ -1,3 +1,4 @@
+@tool
 extends GraphNodeData
 class_name ChoicePromptNodeData
 static var _control_scene: PackedScene = null

@@ -1,3 +1,4 @@
+@tool
 extends GraphNodeData
 class_name ChangeCharacterNodeData
 static var _control_scene: PackedScene = null

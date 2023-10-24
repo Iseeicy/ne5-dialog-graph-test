@@ -1,3 +1,4 @@
+@tool
 extends Resource
 class_name DialogGraph
 
@@ -45,7 +46,14 @@ func connect_nodes(from_id: int, from_port: int, to_id: int, to_port: int) -> bo
 	connections.push_back(connection)
 		
 	return true
-	
+
+func get_entry_id() -> int:
+	for id in all_nodes.keys():
+		var node = all_nodes[id]
+		if node is EntryNodeData:
+			return id
+			
+	return -1
 
 #
 #	Private Functions

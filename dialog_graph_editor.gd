@@ -1,3 +1,4 @@
+@tool
 extends VBoxContainer
 class_name DialogGraphEditor
 
@@ -78,6 +79,9 @@ func load_from_resource(dialog_graph: DialogGraph) -> void:
 		if not (child is DialogGraphNode):
 			continue
 		child.queue_free()
+	
+	if dialog_graph == null:
+		return
 	
 	# Stores spawned controls by their ID (int -> DialogGraphNode)
 	var control_by_id: Dictionary = {}

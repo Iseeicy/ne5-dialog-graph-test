@@ -9,32 +9,37 @@
 script = ExtResource("1_ng0mn")
 position = Vector2(0, 0)
 
-[sub_resource type="Resource" id="Resource_5q4ki"]
-script = ExtResource("2_aupnn")
-text = Array[String](["What would you like to do?"])
-position = Vector2(0, 200)
-
 [sub_resource type="Resource" id="Resource_yvou1"]
 script = ExtResource("3_iik4j")
 text = ""
 choices = Array[String](["Test dialog!", "Do something else", "Nothing!"])
-position = Vector2(0, 340)
+position = Vector2(20, 360)
 
 [sub_resource type="Resource" id="Resource_twnpj"]
 script = ExtResource("2_aupnn")
 text = Array[String](["Good news!", "That's what ur doing. Nerd."])
 position = Vector2(700, 420)
 
+[sub_resource type="Resource" id="Resource_5q4ki"]
+script = ExtResource("2_aupnn")
+text = Array[String](["What would you like to do?"])
+position = Vector2(0, 200)
+
 [resource]
 script = ExtResource("4_b71q4")
 all_nodes = {
 1: SubResource("Resource_jh0qu"),
-2: SubResource("Resource_5q4ki"),
-3: SubResource("Resource_yvou1"),
-4: SubResource("Resource_twnpj")
+2: SubResource("Resource_yvou1"),
+3: SubResource("Resource_twnpj"),
+4: SubResource("Resource_5q4ki")
 }
 connections = Array[Dictionary]([{
 "from_id": 1,
+"from_port": 0,
+"to_id": 4,
+"to_port": 0
+}, {
+"from_id": 4,
 "from_port": 0,
 "to_id": 2,
 "to_port": 0
@@ -42,10 +47,5 @@ connections = Array[Dictionary]([{
 "from_id": 2,
 "from_port": 0,
 "to_id": 3,
-"to_port": 0
-}, {
-"from_id": 3,
-"from_port": 0,
-"to_id": 4,
 "to_port": 0
 }])

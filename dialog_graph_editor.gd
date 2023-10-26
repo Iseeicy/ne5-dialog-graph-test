@@ -17,12 +17,18 @@ signal chose_node_scenes(scenes_by_name: Dictionary)
 
 ## All node scenes stored by their name (String -> PackedScene)
 var _node_scene_by_name: Dictionary = {}
+var _selected_nodes: Array[DialogGraphNode] = []
+var _preview_text_panel: Control
+var _text_reader: TextReader
 
 #
 #	Godot Functions
 #
 
 func _ready():
+	_preview_text_panel = $GraphEdit/PreviewTextWindow
+	_text_reader = $GraphEdit/PreviewTextWindow/MarginContainer/TextReaderLabel/TextReader
+	
 	for scene in node_scenes:
 		var temp_node = scene.instantiate()
 		_node_scene_by_name[temp_node.name] = scene
@@ -79,6 +85,10 @@ func load_from_resource(dialog_graph: DialogGraph) -> void:
 		if not (child is DialogGraphNode):
 			continue
 		child.queue_free()
+	
+	# Deselect all nodes
+	_selected_nodes.clear()
+	_update_selected_nodes()
 	
 	if dialog_graph == null:
 		return
@@ -145,6 +155,29 @@ func _spawn_node(node_scene: PackedScene) -> GraphNode:
 	$GraphEdit.add_child(new_node)
 	return new_node
 
+func _get_last_text_from_selected_nodes():
+	var last_text = null
+	
+	for node in _selected_nodes:
+		if not node.get_node_data() is DialogTextNodeData:
+			continue
+			
+		var data = node.get_node_data() as DialogTextNodeData
+		last_text = data.text
+	
+	return last_text
+
+func _update_selected_nodes() -> void:
+	var last_text = _get_last_text_from_selected_nodes()
+	
+	if _selected_nodes.size() > 0 and last_text != null and last_text.size() > 0:
+		_preview_text_panel.visible = true
+		_text_reader.start_reading(last_text[0])
+	else:
+		_text_reader.cancel_reading()
+		_preview_text_panel.visible = false
+		
+
 #
 #	Signals
 #
@@ -159,8 +192,10 @@ func _on_add_node_spawn_node(scene: PackedScene):
 	
 func _on_graph_edit_delete_nodes_request(nodes):
 	for node_name in nodes:
-		delete_node($GraphEdit.get_node(node_name as NodePath))
-
+		var node_to_delete = $GraphEdit.get_node(node_name as NodePath) 
+		delete_node(node_to_delete)
+		_on_graph_edit_node_deselected(node_to_delete)
+		
 func _on_graph_edit_connection_request(from_node, from_port, to_node, to_port):
 	# If the hovering node is already connected to something else, INGORE this
 	if _is_node_port_connected(from_node, from_port):
@@ -171,5 +206,10 @@ func _on_graph_edit_connection_request(from_node, from_port, to_node, to_port):
 func _on_graph_edit_disconnection_request(from_node, from_port, to_node, to_port):
 	$GraphEdit.disconnect_node(from_node, from_port, to_node, to_port)
 
+func _on_graph_edit_node_selected(node):
+	_selected_nodes.push_back(node)
+	_update_selected_nodes()
 
-
+func _on_graph_edit_node_deselected(node):
+	_selected_nodes.erase(node)
+	_update_selected_nodes()

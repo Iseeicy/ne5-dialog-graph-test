@@ -13,3 +13,6 @@ func get_control_scene() -> PackedScene:
 		_control_scene = load("res://nodes/forwarder/forwarder_node.tscn")
 	
 	return _control_scene
+
+func get_node_name() -> String:
+	return "Forwarder"

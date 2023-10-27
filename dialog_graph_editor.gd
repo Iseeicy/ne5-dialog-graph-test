@@ -112,8 +112,6 @@ func load_from_resource(dialog_graph: DialogGraph) -> void:
 		control.set_node_data(data)
 		
 	# Actually connect the nodes
-	# (conn is defined as follows:)
-	##{ "from_id": int, "from_port": int, "to_id": int, "to_port": int }
 	for conn in dialog_graph.connections:
 		# Get the nodes with these IDs
 		var from_node = control_by_id[conn.from_id]

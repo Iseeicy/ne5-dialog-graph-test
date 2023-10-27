@@ -3,16 +3,6 @@ extends Resource
 class_name DialogGraph
 
 #
-#	Classes
-#
-
-class NodeConnection:
-	var from_id: int
-	var from_port: int
-	var to_id: int
-	var to_port: int
-
-#
 #	Exports
 #
 
@@ -22,7 +12,7 @@ class NodeConnection:
 }
 
 ## A list of connections between the nodes in the graph
-@export var connections: Array = []
+@export var connections: Array[NodeConnection] = []
 
 #
 #	Private Variables
@@ -51,13 +41,7 @@ func connect_nodes(from_id: int, from_port: int, to_id: int, to_port: int) -> bo
 	if not contains_id(from_id) or not contains_id(to_id):
 		return false
 		
-	var conn = NodeConnection.new()
-	conn.from_id = from_id
-	conn.from_port = from_port
-	conn.to_id = to_id
-	conn.to_port = to_port
-	connections.push_back(conn)
-		
+	connections.push_back(NodeConnection.create(from_id, from_port, to_id, to_port))
 	return true
 
 func get_entry_id() -> int:
@@ -72,19 +56,19 @@ func get_node_data(id: int) -> GraphNodeData:
 	return all_nodes[id]
 	
 ## Returns a list of all connections from or to the given node
-func get_connections_to_and_from(id: int) -> Array:
+func get_connections_to_and_from(id: int) -> Array[NodeConnection]:
 	return connections.filter(
 		func(conn): return conn.from_id == id or conn.to_id == id
 	)
 
 ## Returns a list of all connections from the given node
-func get_connections_from(id: int) -> Array:
+func get_connections_from(id: int) -> Array[NodeConnection]:
 	return connections.filter(
 		func(conn): return conn.from_id == id
 	)
 	
 ## Returns a list of all connections to the given node
-func get_connections_to(id: int) -> Array:
+func get_connections_to(id: int) -> Array[NodeConnection]:
 	return connections.filter(
 		func(conn): return conn.to_id == id
 	)
@@ -92,14 +76,6 @@ func get_connections_to(id: int) -> Array:
 #
 #	Private Functions
 #
-
-func _create_connection_dict(from_id: int, from_port: int, to_id: int, to_port: int) -> Dictionary:
-	return {
-		"from_id": from_id,
-		"from_port": from_port,
-		"to_id": to_id,
-		"to_port": to_port
-	}
 
 func _init_last_id() -> int:
 	if all_nodes.size() > 0:

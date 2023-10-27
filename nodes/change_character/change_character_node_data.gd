@@ -18,3 +18,6 @@ func get_control_scene() -> PackedScene:
 		_control_scene = load("res://nodes/change_character/change_character_node.tscn")
 	
 	return _control_scene
+
+func get_node_name() -> String:
+	return "ChangeCharacter"

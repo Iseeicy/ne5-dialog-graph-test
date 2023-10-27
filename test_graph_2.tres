@@ -1,59 +1,45 @@
-[gd_resource type="Resource" script_class="DialogGraph" load_steps=10 format=3 uid="uid://b3ppvdtlmjk1i"]
+[gd_resource type="Resource" script_class="DialogGraph" load_steps=10 format=3 uid="uid://2fqnm7syox4m"]
 
 [ext_resource type="Script" path="res://nodes/entry/entry_node_data.gd" id="1_0i76b"]
 [ext_resource type="Script" path="res://nodes/dialog_text/dialog_text_node_data.gd" id="2_38eal"]
 [ext_resource type="Script" path="res://dialog_graph.gd" id="2_ai1vw"]
-[ext_resource type="Script" path="res://nodes/forwarder/forwarder_node_data.gd" id="3_eo6xv"]
+[ext_resource type="Script" path="res://node_connection.gd" id="4_r0n3v"]
 
-[sub_resource type="Resource" id="Resource_fmm0f"]
+[sub_resource type="Resource" id="Resource_jh0qu"]
 script = ExtResource("1_0i76b")
 position = Vector2(0, 0)
 
-[sub_resource type="Resource" id="Resource_rttdt"]
-script = ExtResource("3_eo6xv")
-position = Vector2(200, 560)
-
-[sub_resource type="Resource" id="Resource_8b6s6"]
-script = ExtResource("3_eo6xv")
+[sub_resource type="Resource" id="Resource_lkumm"]
+script = ExtResource("2_38eal")
+text = Array[String](["What are your thoughts?", "Good?", "Bad?", "...
+Just kidding.
+You don't get to answer."])
 position = Vector2(240, 340)
 
-[sub_resource type="Resource" id="Resource_ks63c"]
+[sub_resource type="Resource" id="Resource_gebpg"]
 script = ExtResource("2_38eal")
-text = Array[String](["Well...!"])
-position = Vector2(140, 140)
+text = Array[String](["This is a dialog test!"])
+position = Vector2(240, 200)
 
-[sub_resource type="Resource" id="Resource_d4d1h"]
-script = ExtResource("2_38eal")
-text = Array[String](["This is no good."])
-position = Vector2(540, 540)
+[sub_resource type="Resource" id="Resource_jomik"]
+script = ExtResource("4_r0n3v")
+from_id = 1
+from_port = 0
+to_id = 3
+to_port = 0
+
+[sub_resource type="Resource" id="Resource_vrpwi"]
+script = ExtResource("4_r0n3v")
+from_id = 3
+from_port = 0
+to_id = 2
+to_port = 0
 
 [resource]
 script = ExtResource("2_ai1vw")
 all_nodes = {
-1: SubResource("Resource_fmm0f"),
-2: SubResource("Resource_rttdt"),
-3: SubResource("Resource_8b6s6"),
-4: SubResource("Resource_ks63c"),
-5: SubResource("Resource_d4d1h")
+1: SubResource("Resource_jh0qu"),
+2: SubResource("Resource_lkumm"),
+3: SubResource("Resource_gebpg")
 }
-connections = Array[Dictionary]([{
-"from_id": 4,
-"from_port": 0,
-"to_id": 3,
-"to_port": 0
-}, {
-"from_id": 3,
-"from_port": 0,
-"to_id": 2,
-"to_port": 0
-}, {
-"from_id": 2,
-"from_port": 0,
-"to_id": 5,
-"to_port": 0
-}, {
-"from_id": 1,
-"from_port": 0,
-"to_id": 4,
-"to_port": 0
-}])
+connections = Array[ExtResource("4_r0n3v")]([SubResource("Resource_jomik"), SubResource("Resource_vrpwi")])

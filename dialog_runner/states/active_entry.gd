@@ -6,7 +6,16 @@ extends DialogRunnerActiveHandlerState
 
 func state_enter(_message: Dictionary = {}) -> void:
 	_get_parent_state().state_enter(_message)
+	call_deferred("_go_to_next_node")
 	
+func state_exit() -> void:
+	_get_parent_state().state_exit()
+
+#
+#	Private Functions
+#
+
+func _go_to_next_node():
 	# Get the connections to this entry node
 	var connections = graph.get_connections_from(id)
 	
@@ -17,6 +26,3 @@ func state_enter(_message: Dictionary = {}) -> void:
 	
 	# AT THIS POINT - we have at least one connection - so transition to the first one
 	runner.go_to_node(connections[0].to_id)
-	
-func state_exit() -> void:
-	_get_parent_state().state_exit()

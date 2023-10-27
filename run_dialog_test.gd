@@ -1,9 +1,21 @@
 extends Control
 
+#
+#	Exports
+#
+
 @export var dialog: DialogGraph
+
+#
+#	Private Variables
+#
 
 var _node_id: int = -1
 var _is_in_text: bool = false
+
+#
+#	Private Functions
+#
 
 func _act_on_node(id: int) -> void:
 	var data = dialog.get_node_data(id)
@@ -34,6 +46,10 @@ func _transition_to_node(id: int) -> void:
 	
 	_node_id = id
 	_act_on_node(id)
+
+#
+#	Signals
+#
 
 func _on_next_button_pressed():
 	# If we haven't started the dialog yet, START IT

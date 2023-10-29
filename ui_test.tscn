@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://b4p7dxsgmidgx"]
+[gd_scene load_steps=3 format=3 uid="uid://b4djmdjhpu8du"]
 
 [ext_resource type="Script" path="res://ui_test.gd" id="1_nwuap"]
 [ext_resource type="PackedScene" uid="uid://ckoiwe8aelbix" path="res://addons/netengine5/net.bobbo.dialog-graph/dialog_graph_editor.tscn" id="2_dlh4k"]

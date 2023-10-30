@@ -74,4 +74,3 @@ func _on_dialog_interacted() -> void:
 ## jumping to the next dialog.
 func _on_text_window_state_changed(_state: TextWindowState, path: String) -> void:
 	_skip_instead_of_progress = path.ends_with("Showing")
-	print(path)

@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="DialogGraph" load_steps=13 format=3 uid="uid://bqenqw1s5y0t5"]
+[gd_resource type="Resource" script_class="DialogGraph" load_steps=14 format=3 uid="uid://bqenqw1s5y0t5"]
 
 [ext_resource type="Script" path="res://nodes/entry/entry_node_data.gd" id="1_ng0mn"]
 [ext_resource type="Script" path="res://nodes/dialog_text/dialog_text_node_data.gd" id="2_aupnn"]
@@ -13,38 +13,45 @@ position = Vector2(0, 0)
 [sub_resource type="Resource" id="Resource_5q4ki"]
 script = ExtResource("2_aupnn")
 text = Array[String](["What would you like to do?"])
-position = Vector2(0, 200)
-
-[sub_resource type="Resource" id="Resource_twnpj"]
-script = ExtResource("2_aupnn")
-text = Array[String](["Good news!", "That's what ur doing. Nerd."])
-position = Vector2(660, 240)
+position = Vector2(200, 0)
 
 [sub_resource type="Resource" id="Resource_yvou1"]
 script = ExtResource("3_iik4j")
 text = ""
-choices = Array[String](["Test dialog!", "Do something else", "Nothing!"])
-position = Vector2(200, 360)
+choices = Array[String](["Test dialog!", "Do something else", "Try again"])
+position = Vector2(520, 0)
 
-[sub_resource type="Resource" id="Resource_wt4v6"]
+[sub_resource type="Resource" id="Resource_twnpj"]
+script = ExtResource("2_aupnn")
+text = Array[String](["Good news!", "That's what ur doing. Nerd."])
+position = Vector2(1000, 0)
+
+[sub_resource type="Resource" id="Resource_qj84x"]
 script = ExtResource("4_a7fly")
 from_id = 1
 from_port = 0
 to_id = 2
 to_port = 0
 
-[sub_resource type="Resource" id="Resource_afclg"]
+[sub_resource type="Resource" id="Resource_p1qa1"]
 script = ExtResource("4_a7fly")
 from_id = 2
+from_port = 0
+to_id = 3
+to_port = 0
+
+[sub_resource type="Resource" id="Resource_0j7cw"]
+script = ExtResource("4_a7fly")
+from_id = 3
 from_port = 0
 to_id = 4
 to_port = 0
 
-[sub_resource type="Resource" id="Resource_3iri0"]
+[sub_resource type="Resource" id="Resource_qeo73"]
 script = ExtResource("4_a7fly")
-from_id = 4
-from_port = 0
-to_id = 3
+from_id = 3
+from_port = 2
+to_id = 2
 to_port = 0
 
 [resource]
@@ -52,7 +59,7 @@ script = ExtResource("4_b71q4")
 all_nodes = {
 1: SubResource("Resource_jh0qu"),
 2: SubResource("Resource_5q4ki"),
-3: SubResource("Resource_twnpj"),
-4: SubResource("Resource_yvou1")
+3: SubResource("Resource_yvou1"),
+4: SubResource("Resource_twnpj")
 }
-connections = Array[ExtResource("4_a7fly")]([SubResource("Resource_wt4v6"), SubResource("Resource_afclg"), SubResource("Resource_3iri0")])
+connections = Array[ExtResource("4_a7fly")]([SubResource("Resource_qj84x"), SubResource("Resource_p1qa1"), SubResource("Resource_0j7cw"), SubResource("Resource_qeo73")])

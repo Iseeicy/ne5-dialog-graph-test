@@ -84,8 +84,14 @@ func go_to_node(node_id: int) -> bool:
 	var state_path = "Active/%s" % node_name
 	var found_state = get_node_or_null(state_path) as DialogRunnerState
 	if found_state == null:
-		printerr("This DialogRunner does not support %s nodes" % node_name)
-		return false
+		# If we can find a state that handles unknown dialog nodes,
+		# then transition to that!
+		state_path = "Active/Unknown"
+		found_state = get_node_or_null(state_path) as DialogRunnerState
+		if found_state == null:
+			printerr("This DialogRunner does not support %s nodes." % node_name)
+			return false
+		print("Handling unknown %s node...!" % node_name)
 	
 	# AT THIS POINT - The desired node exists, and we can handle it... so...
 	# HANDLE IT!

@@ -6,6 +6,9 @@ class_name DialogGraphNodeDescriptor
 #	Exports
 #
 
+## The name that represents the node type we are describing.
+@export var node_name: String = ""
+
 ## The scene containing the visual GraphNode for GraphEdit that represents this
 ## node type. 
 @export var graph_node_scene: PackedScene = null

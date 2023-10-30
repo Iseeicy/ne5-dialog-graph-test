@@ -6,5 +6,6 @@
 
 [resource]
 script = ExtResource("1_1sg8j")
+node_name = "Forwarder"
 graph_node_scene = ExtResource("1_gifil")
 node_handler_scene = ExtResource("2_pb447")

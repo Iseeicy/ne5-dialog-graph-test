@@ -6,5 +6,6 @@
 
 [resource]
 script = ExtResource("1_ajmhc")
+node_name = "ChoicePrompt"
 graph_node_scene = ExtResource("1_4e6wy")
 node_handler_scene = ExtResource("2_r0nes")

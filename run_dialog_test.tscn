@@ -42,7 +42,7 @@ script = ExtResource("7_r2agy")
 [node name="ChangeCharacter" type="Node" parent="DialogRunner/Active"]
 script = ExtResource("8_qmx0a")
 
-[node name="ChoicePromptt" type="Node" parent="DialogRunner/Active"]
+[node name="ChoicePrompt" type="Node" parent="DialogRunner/Active"]
 script = ExtResource("9_qvduv")
 
 [node name="DialogText" type="Node" parent="DialogRunner/Active"]

@@ -23,7 +23,7 @@ dialog = ExtResource("2_2bd7m")
 layout_mode = 1
 
 [node name="TextSpeaker" parent="DreamsOfBeingWindow/VBoxContainer/ContentsContainer/DialogContents/MarginContainer/TextReaderLabel" index="2" node_paths=PackedStringArray("audio_origin_node")]
-audio_origin_node = NodePath("@Node@20326")
+audio_origin_node = NodePath("@Node@20253")
 
 [node name="DialogRunner" type="Node" parent="." node_paths=PackedStringArray("text_window")]
 script = ExtResource("4_usd2x")

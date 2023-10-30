@@ -24,7 +24,7 @@ position = Vector2(520, 0)
 [sub_resource type="Resource" id="Resource_twnpj"]
 script = ExtResource("2_aupnn")
 text = Array[String](["Good news!", "That's what ur doing. Nerd."])
-position = Vector2(1000, 0)
+position = Vector2(1000, 80)
 
 [sub_resource type="Resource" id="Resource_ou3if"]
 script = ExtResource("4_a7fly")

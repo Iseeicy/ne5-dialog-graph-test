@@ -185,13 +185,18 @@ func _update_selected_nodes() -> void:
 #	Signals
 #
 
-func _on_add_node_spawn_node(desc: DialogGraphNodeDescriptor):
+func _on_add_node_spawn_node(desc: DialogGraphNodeDescriptor, position: Vector2):
 	var new_node: GraphNode = _spawn_node(desc)
+	new_node.position_offset = position
 	
-	# Update position to be middle of screen
-	new_node.position_offset = $GraphEdit.scroll_offset
-	new_node.position_offset += $GraphEdit.size / 2
-	new_node.position_offset /= $GraphEdit.zoom
+func _on_right_click_menu_spawn_node_from(desc, position, to_node, to_port):
+	var new_node: GraphNode = _spawn_node(desc)
+	new_node.position_offset = position
+
+func _on_right_click_menu_spawn_node_to(desc, position, from_node, from_port):
+	var new_node: GraphNode = _spawn_node(desc)
+	new_node.position_offset = position
+	$GraphEdit.connect_node(from_node, from_port, new_node.name, 0)	
 	
 func _on_graph_edit_delete_nodes_request(nodes):
 	for node_name in nodes:
@@ -216,3 +221,6 @@ func _on_graph_edit_node_selected(node):
 func _on_graph_edit_node_deselected(node):
 	_selected_nodes.erase(node)
 	_update_selected_nodes()
+
+
+

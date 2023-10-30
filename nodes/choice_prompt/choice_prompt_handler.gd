@@ -49,7 +49,7 @@ func _on_text_window_request_choice_confirm(index: int) -> void:
 	text_window.confirm_choice(index)
 
 ## Called when the text window has confirmed a choice
-func _on_text_window_choice_confirm(index: int, prompt: TextWindowChoicePrompt) -> void:
+func _on_text_window_choice_confirm(index: int, _prompt: TextWindowChoicePrompt) -> void:
 	# Get the connections to this choice node
 	var connections = graph.get_connections_from(id)
 	var translated_index = -1

@@ -4,16 +4,16 @@
 [ext_resource type="Resource" uid="uid://bqenqw1s5y0t5" path="res://test_graph.tres" id="2_2bd7m"]
 [ext_resource type="PackedScene" uid="uid://c7eoh8t1t7pq6" path="res://addons/netengine5/net.bobbo.text-window.dreams-of-being/window.tscn" id="2_46xvo"]
 [ext_resource type="Script" path="res://dialog_runner/dialog_runner.gd" id="4_usd2x"]
+[ext_resource type="Resource" uid="uid://cpp3y2hlglg5c" path="res://nodes/change_character/change_character_desc.tres" id="5_kiqoj"]
 [ext_resource type="Script" path="res://dialog_runner/states/inactive.gd" id="6_6ase2"]
+[ext_resource type="Resource" uid="uid://fr7cvmjjbcrf" path="res://nodes/choice_prompt/choice_prompt_desc.tres" id="6_8v646"]
+[ext_resource type="Resource" uid="uid://bsr7sku2bwkax" path="res://nodes/dialog_text/dialog_text_desc.tres" id="7_e1ye1"]
 [ext_resource type="Script" path="res://dialog_runner/states/active.gd" id="7_r2agy"]
-[ext_resource type="Script" path="res://dialog_runner/states/active_change_character.gd" id="8_qmx0a"]
-[ext_resource type="Script" path="res://dialog_runner/states/active_dialog_text.gd" id="8_v8h6m"]
-[ext_resource type="Script" path="res://dialog_runner/states/active_choice_prompt.gd" id="9_qvduv"]
-[ext_resource type="Script" path="res://dialog_runner/states/active_entry.gd" id="11_0tnqu"]
-[ext_resource type="Script" path="res://dialog_runner/states/active_forwarder.gd" id="12_aftay"]
+[ext_resource type="Resource" uid="uid://cmpfaetr774wm" path="res://nodes/entry/entry_desc.tres" id="8_x0f4y"]
+[ext_resource type="Resource" uid="uid://bck5y5qf4cv2n" path="res://nodes/forwarder/forwarder_desc.tres" id="9_456ey"]
+[ext_resource type="Resource" uid="uid://bbnkiid038ytj" path="res://nodes/knowledge_action/knowledge_action_desc.tres" id="10_aucvd"]
 [ext_resource type="Script" path="res://debug_dialog_runner_state_label.gd" id="13_3wm12"]
-[ext_resource type="Script" path="res://dialog_runner/states/active_knowledge_action.gd" id="13_4ihuh"]
-[ext_resource type="Script" path="res://dialog_runner/states/active_unknown.gd" id="13_vc1iu"]
+[ext_resource type="Script" path="res://dialog_runner/states/unknown_handler.gd" id="13_q8aee"]
 
 [node name="RunDialogTest" type="Control"]
 layout_mode = 3
@@ -29,10 +29,11 @@ dialog = ExtResource("2_2bd7m")
 layout_mode = 1
 
 [node name="TextSpeaker" parent="DreamsOfBeingWindow/VBoxContainer/ContentsContainer/DialogContents/MarginContainer/TextReaderLabel" index="2" node_paths=PackedStringArray("audio_origin_node")]
-audio_origin_node = NodePath("@Node@20351")
+audio_origin_node = NodePath("@Node@38863")
 
 [node name="DialogRunner" type="Node" parent="." node_paths=PackedStringArray("text_window")]
 script = ExtResource("4_usd2x")
+node_descriptors = Array[Resource("res://dialog_graph_node_descriptor.gd")]([ExtResource("5_kiqoj"), ExtResource("6_8v646"), ExtResource("7_e1ye1"), ExtResource("8_x0f4y"), ExtResource("9_456ey"), ExtResource("10_aucvd")])
 text_window = NodePath("../DreamsOfBeingWindow")
 initial_state = NodePath("Inactive")
 
@@ -42,26 +43,8 @@ script = ExtResource("6_6ase2")
 [node name="Active" type="Node" parent="DialogRunner"]
 script = ExtResource("7_r2agy")
 
-[node name="ChangeCharacter" type="Node" parent="DialogRunner/Active"]
-script = ExtResource("8_qmx0a")
-
-[node name="ChoicePrompt" type="Node" parent="DialogRunner/Active"]
-script = ExtResource("9_qvduv")
-
-[node name="DialogText" type="Node" parent="DialogRunner/Active"]
-script = ExtResource("8_v8h6m")
-
-[node name="Entry" type="Node" parent="DialogRunner/Active"]
-script = ExtResource("11_0tnqu")
-
-[node name="Forwarder" type="Node" parent="DialogRunner/Active"]
-script = ExtResource("12_aftay")
-
-[node name="KnowledgeAction" type="Node" parent="DialogRunner/Active"]
-script = ExtResource("13_4ihuh")
-
 [node name="Unknown" type="Node" parent="DialogRunner/Active"]
-script = ExtResource("13_vc1iu")
+script = ExtResource("13_q8aee")
 
 [node name="NextButton" type="Button" parent="."]
 layout_mode = 0

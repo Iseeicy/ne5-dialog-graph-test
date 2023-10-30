@@ -11,6 +11,10 @@ signal dialog_interacted()
 ## Emitted when `dialog_choice_hover()` is called.
 signal dialog_choice_hovered(index: int)
 
+## The descriptors that provide comprehensive info on what types of
+## dialog nodes exist and how to handle them
+@export var node_descriptors: Array[DialogGraphNodeDescriptor]
+
 ## The window to use when displaying dialog text and choice prompts
 @export var text_window: TextWindow
 
@@ -19,6 +23,19 @@ signal dialog_choice_hovered(index: int)
 #
 
 var _current_dialog: DialogGraph = null
+
+#
+#	Godot Functions
+#
+
+func _ready():
+	# Spawn the data handlers
+	for desc in node_descriptors:
+		var new_handler = desc.node_handler_scene.instantiate()
+		$Active.add_child(new_handler)
+	
+	super()
+	
 
 #
 #	Public Functions

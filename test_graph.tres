@@ -43,15 +43,15 @@ to_port = 0
 [sub_resource type="Resource" id="Resource_2vpdw"]
 script = ExtResource("4_a7fly")
 from_id = 3
-from_port = 0
-to_id = 4
+from_port = 2
+to_id = 2
 to_port = 0
 
 [sub_resource type="Resource" id="Resource_ruc8d"]
 script = ExtResource("4_a7fly")
 from_id = 3
-from_port = 2
-to_id = 2
+from_port = 0
+to_id = 4
 to_port = 0
 
 [resource]

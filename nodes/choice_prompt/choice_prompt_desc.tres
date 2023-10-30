@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="DialogGraphNodeDescriptor" load_steps=4 format=3 uid="uid://fr7cvmjjbcrf"]
+
+[ext_resource type="PackedScene" uid="uid://l1hq7y6bnxic" path="res://nodes/choice_prompt/choice_prompt_node.tscn" id="1_4e6wy"]
+[ext_resource type="Script" path="res://dialog_graph_node_descriptor.gd" id="1_ajmhc"]
+[ext_resource type="PackedScene" uid="uid://by2nhehbj4f5j" path="res://nodes/choice_prompt/choice_prompt_handler.tscn" id="2_r0nes"]
+
+[resource]
+script = ExtResource("1_ajmhc")
+graph_node_scene = ExtResource("1_4e6wy")
+node_handler_scene = ExtResource("2_r0nes")

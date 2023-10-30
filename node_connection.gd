@@ -11,6 +11,16 @@ class_name NodeConnection
 @export var to_port: int = 0
 
 #
+#	Public Functions
+#
+
+func copy_to(other: NodeConnection) -> void:
+	other.from_id = self.from_id
+	other.from_port = self.from_port
+	other.to_id = self.to_id
+	other.to_port = self.to_port
+
+#
 #	Static Functions
 #
 

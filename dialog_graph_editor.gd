@@ -56,27 +56,48 @@ func delete_node(node: GraphNode):
 	node.queue_free()
 
 func save_to_resource(dialog_graph: DialogGraph) -> void:
-	dialog_graph.clear()
-	var name_to_id: Dictionary = {}
-	
-	# Add graph data to the graph, noting which node names correspond
-	# to what ID
+	# Collect the node data from children, and note what GraphNode child
+	# it belongs to.
+	var data_to_add: Array = []
 	for child in $GraphEdit.get_children():
 		if not (child is DialogGraphNode):
 			continue
 			
 		var node_data = child.get_node_data()
 		node_data.position = child.position_offset
-		
-		var id = dialog_graph.add_node(node_data)
+		data_to_add.push_back([child, node_data])
+	
+	# Tell the given graph that we have a new list of nodes. This will update
+	# the graph's node list internally and keep IDs correctly
+	var updated_data_to_add: Array[GraphNodeData] = []
+	for data in data_to_add:
+		updated_data_to_add.push_back(data[1])
+	dialog_graph.update_nodes(updated_data_to_add)
+	
+	# Use the dialog graph and our previously cached array of GraphNode children
+	# to create a map that allows us to translate the child name into the
+	# graph's node ID.
+	var name_to_id: Dictionary = {}
+	var data_to_id_map = dialog_graph.create_node_to_index_map()
+	for data_pair in data_to_add:
+		var child = data_pair[0]			# The child graph node
+		var node_data = data_pair[1]		# The data of the node itself
+		var id = data_to_id_map[node_data]	# The id of this data in the graph
 		name_to_id[child.name] = id
 	
 	# Get connections in the form of:
 	# { from_port: 0, from: "GraphNode name 0", to_port: 1, to: "GraphNode name 1" }
+	var new_connections: Array[NodeConnection] = []
 	for connection in $GraphEdit.get_connection_list():
-		var from_id: int = name_to_id[connection.from]
-		var to_id: int = name_to_id[connection.to]
-		dialog_graph.connect_nodes(from_id, connection.from_port, to_id, connection.to_port)
+		new_connections.push_back(
+			NodeConnection.create(
+				name_to_id[connection.from], 
+				connection.from_port, 
+				name_to_id[connection.to], 
+				connection.to_port
+			)
+		)
+	dialog_graph.update_connections(new_connections)
 
 func load_from_resource(dialog_graph: DialogGraph) -> void:
 	# Clean out the existing graph edit

@@ -11,22 +11,21 @@ extends DialogGraphNode
 #	Variables
 #
 
-var _data: DialogTextNodeData = DialogTextNodeData.new()
 @onready var _starting_size: Vector2 = size 
 var _text_edits: Array[TextEdit] = []
+
+var _casted_data: DialogTextNodeData:
+	get:
+		return _data
 
 #
 #	Public Functions
 #
 
-func get_node_data() -> GraphNodeData:
-	return _data
-
-func set_node_data(data: GraphNodeData) -> bool:
-	# If this isn't the right type, exit early. Otherwise, cast correctly
-	if not data is DialogTextNodeData:
-		return false
-	_data = data as DialogTextNodeData
+func set_node_data(data: GraphNodeData) -> GraphNodeData:
+	var casted_data = data as DialogTextNodeData
+	if casted_data == null:
+		return null
 	
 	# Clear any old edits
 	for edit in _text_edits:
@@ -34,12 +33,12 @@ func set_node_data(data: GraphNodeData) -> bool:
 	_text_edits.clear()
 	
 	# Add controls for new texts
-	for single_text in _data.text:
+	for single_text in casted_data.text:
 		var new_edit = _new_edit_control()
 		_text_edits.push_back(new_edit)
 		new_edit.text = single_text
 	
-	return true
+	return super(casted_data)
 
 #
 #	Private Functions
@@ -48,7 +47,7 @@ func set_node_data(data: GraphNodeData) -> bool:
 func _add_new_edit() -> void:
 	var new_edit = _new_edit_control()
 	_text_edits.push_back(new_edit)
-	_data.text.push_back("")
+	_casted_data.text.push_back("")
 
 func _remove_last_edit() -> void:
 	if _text_edits.size() == 0:
@@ -56,7 +55,7 @@ func _remove_last_edit() -> void:
 	
 	var old_edit = _text_edits.pop_back()
 	_free_edit_control(old_edit)
-	_data.text.pop_back()
+	_casted_data.text.pop_back()
 
 func _new_edit_control() -> TextEdit:
 	var new_edit = text_edit_scene.instantiate()
@@ -84,4 +83,4 @@ func _on_add_line_button_pressed():
 	_add_new_edit()
 	
 func _on_text_changed(index: int, new_text: String) -> void:
-	_data.text[index] = new_text
+	_casted_data.text[index] = new_text

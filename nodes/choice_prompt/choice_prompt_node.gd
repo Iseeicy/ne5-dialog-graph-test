@@ -11,35 +11,34 @@ extends DialogGraphNode
 #	Variables
 #
 
-var _data: ChoicePromptNodeData = ChoicePromptNodeData.new()
 @onready var _starting_size: Vector2 = size 
 var _choice_options: Array[ChoicePromptOptionContainer] = []
+
+var _casted_data: ChoicePromptNodeData:
+	get:
+		return _data
 
 #
 #	Public Functions
 #
 
-func get_node_data() -> GraphNodeData:
-	return _data
-
-func set_node_data(data: GraphNodeData) -> bool:
-	# If this isn't the right type, exit early. Otherwise, cast correctly
-	if not data is ChoicePromptNodeData:
-		return false
-	_data = data as ChoicePromptNodeData
+func set_node_data(data: GraphNodeData) -> GraphNodeData:
+	var casted_data = data as ChoicePromptNodeData
+	if casted_data == null:
+		return null
 	
 	# Remove any choices that exist
 	for option in _choice_options:
 		_free_option_control(option)
 	_choice_options.clear()	
 	
-	for choice in _data.choices:
+	for choice in casted_data.choices:
 		var new_option = _new_option_control()
 		_choice_options.push_back(new_option)
 		new_option.set_text(choice)
 	
 	_update_size()
-	return true
+	return super(casted_data)
 
 #
 #	Private Functions
@@ -51,7 +50,7 @@ func _update_size():
 func _add_new_option() -> void:
 	var new_option = _new_option_control()
 	_choice_options.push_back(new_option)	
-	_data.choices.push_back("")
+	_casted_data.choices.push_back("")
 
 func _remove_last_option() -> void:
 	if _choice_options.size() == 0:
@@ -59,7 +58,7 @@ func _remove_last_option() -> void:
 
 	var old_option = _choice_options.pop_back()
 	_free_option_control(old_option)
-	_data.choices.pop_back()
+	_casted_data.choices.pop_back()
 	
 func _new_option_control() -> ChoicePromptOptionContainer:
 	var new_option = choice_option_scene.instantiate()
@@ -108,4 +107,4 @@ func _on_settings_visibility_changed(_is_visible: bool):
 	_update_size()
 	
 func _on_text_changed(index: int, new_text: String) -> void:
-	_data.choices[index] = new_text
+	_casted_data.choices[index] = new_text

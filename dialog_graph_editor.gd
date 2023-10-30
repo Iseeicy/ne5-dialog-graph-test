@@ -3,20 +3,10 @@ extends VBoxContainer
 class_name DialogGraphEditor
 
 #
-#	Exports
-#
-
-signal chose_node_scenes(scenes_by_name: Dictionary)
-
-## The graph nodes to allow spawning for
-@export var node_scenes: Array[PackedScene] = []
-
-#
 #	Private Variables
 #
 
 ## All node scenes stored by their name (String -> PackedScene)
-var _node_scene_by_name: Dictionary = {}
 var _selected_nodes: Array[DialogGraphNode] = []
 var _preview_text_panel: Control
 var _text_reader: TextReader
@@ -29,13 +19,6 @@ func _ready():
 	_preview_text_panel = $GraphEdit/PreviewTextWindow
 	_text_reader = $GraphEdit/PreviewTextWindow/MarginContainer/TextReaderLabel/TextReader
 	
-	for scene in node_scenes:
-		var temp_node = scene.instantiate()
-		_node_scene_by_name[temp_node.name] = scene
-		temp_node.free()
-	
-	chose_node_scenes.emit(_node_scene_by_name)
-
 #
 #	Functions
 #
@@ -120,14 +103,15 @@ func load_from_resource(dialog_graph: DialogGraph) -> void:
 	# Create the controls for each node
 	for id in dialog_graph.all_nodes.keys():
 		var data: GraphNodeData = dialog_graph.all_nodes[id]
+		var desc = GraphNodeDB.find_descriptor_for_data(data)
 		
-		if data.get_control_scene() == null:
+		if desc.graph_node_scene == null:
 			printerr("Couldn't find control for %s" % data)
 			continue
 			
 		# Spawn the control, add it to the dict, and make it represent
 		# this data
-		var control: DialogGraphNode = _spawn_node(data.get_control_scene())
+		var control: DialogGraphNode = _spawn_node(desc)
 		control.position_offset = data.position
 		control_by_id[id] = control
 		control.set_node_data(data)
@@ -162,8 +146,8 @@ func _is_node_port_connected(node_name: String, port: int) -> bool:
 		return true
 	return false
 
-func _spawn_node(node_scene: PackedScene) -> GraphNode:
-	var new_node: GraphNode = node_scene.instantiate()
+func _spawn_node(desc: DialogGraphNodeDescriptor) -> GraphNode:
+	var new_node: GraphNode = desc.instantiate_graph_node()
 	
 	# Tell the node to call our classes function when it wants
 	# to be removed.
@@ -201,8 +185,8 @@ func _update_selected_nodes() -> void:
 #	Signals
 #
 
-func _on_add_node_spawn_node(scene: PackedScene):
-	var new_node: GraphNode = _spawn_node(scene)
+func _on_add_node_spawn_node(desc: DialogGraphNodeDescriptor):
+	var new_node: GraphNode = _spawn_node(desc)
 	
 	# Update position to be middle of screen
 	new_node.position_offset = $GraphEdit.scroll_offset

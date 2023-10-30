@@ -11,10 +11,6 @@ signal dialog_interacted()
 ## Emitted when `dialog_choice_hover()` is called.
 signal dialog_choice_hovered(index: int)
 
-## The descriptors that provide comprehensive info on what types of
-## dialog nodes exist and how to handle them
-@export var node_descriptors: Array[DialogGraphNodeDescriptor]
-
 ## The window to use when displaying dialog text and choice prompts
 @export var text_window: TextWindow
 
@@ -30,7 +26,7 @@ var _current_dialog: DialogGraph = null
 
 func _ready():
 	# Spawn the data handlers
-	for desc in node_descriptors:
+	for desc in GraphNodeDB.descriptors:
 		var new_handler = desc.node_handler_scene.instantiate()
 		$Active.add_child(new_handler)
 	
@@ -88,13 +84,8 @@ func go_to_node(node_id: int) -> bool:
 		return false
 	
 	var data = _current_dialog.get_node_data(node_id)
-	var node_name = data.get_node_name()
+	var node_name = GraphNodeDB.find_descriptor_for_data(data).node_name
 	
-	# If the implementation of this node has not provided a name, exit early
-	if node_name.is_empty():
-		printerr("Implementation of node %s has not provided `get_node_name()`" % node_id)
-		return false
-		
 	# If we don't have a state for the given node implementation, EXIT EARLY
 	# TODO - can we handle this more gracefully? The show must go on. Maybe we just skip if we
 	# can't handle the node?

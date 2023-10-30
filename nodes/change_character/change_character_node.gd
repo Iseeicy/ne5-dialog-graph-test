@@ -5,24 +5,23 @@ extends DialogGraphNode
 #	Private Variables
 #
 
-var _data: ChangeCharacterNodeData = ChangeCharacterNodeData.new()
+var _casted_data: ChangeCharacterNodeData:
+	get:
+		return _data
 
 #
 #	Public Functions
 #
 
-func get_node_data() -> GraphNodeData:
-	return _data
-
-func set_node_data(data: GraphNodeData) -> bool:
-	# If this isn't the right type, exit early. Otherwise, cast correctly
-	if not data is ChangeCharacterNodeData:
-		return false
-	_data = data as ChangeCharacterNodeData
+func set_node_data(data: GraphNodeData) -> GraphNodeData:
+	var casted_data = data as ChangeCharacterNodeData
+	if casted_data == null:
+		return null
 	
-	# Set the UI fields
-	$CharacterDefResourceField.set_target_resource(_data.character_definition)
-	return true
+	$CharacterDefResourceField.set_target_resource(casted_data.character_definition)
+	return super(casted_data)
 
 func _on_character_def_resource_field_target_resource_updated(resource):
-	_data.character_definition = resource
+	_casted_data.character_definition = resource
+
+	

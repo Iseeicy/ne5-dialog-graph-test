@@ -26,28 +26,28 @@ script = ExtResource("2_aupnn")
 text = Array[String](["Good news!", "That's what ur doing. Nerd."])
 position = Vector2(1000, 0)
 
-[sub_resource type="Resource" id="Resource_qj84x"]
+[sub_resource type="Resource" id="Resource_ayq7d"]
 script = ExtResource("4_a7fly")
 from_id = 1
 from_port = 0
 to_id = 2
 to_port = 0
 
-[sub_resource type="Resource" id="Resource_p1qa1"]
+[sub_resource type="Resource" id="Resource_br63b"]
 script = ExtResource("4_a7fly")
 from_id = 2
 from_port = 0
 to_id = 3
 to_port = 0
 
-[sub_resource type="Resource" id="Resource_0j7cw"]
+[sub_resource type="Resource" id="Resource_2vpdw"]
 script = ExtResource("4_a7fly")
 from_id = 3
 from_port = 0
 to_id = 4
 to_port = 0
 
-[sub_resource type="Resource" id="Resource_qeo73"]
+[sub_resource type="Resource" id="Resource_ruc8d"]
 script = ExtResource("4_a7fly")
 from_id = 3
 from_port = 2
@@ -62,4 +62,4 @@ all_nodes = {
 3: SubResource("Resource_yvou1"),
 4: SubResource("Resource_twnpj")
 }
-connections = Array[ExtResource("4_a7fly")]([SubResource("Resource_qj84x"), SubResource("Resource_p1qa1"), SubResource("Resource_0j7cw"), SubResource("Resource_qeo73")])
+connections = Array[ExtResource("4_a7fly")]([SubResource("Resource_ayq7d"), SubResource("Resource_br63b"), SubResource("Resource_2vpdw"), SubResource("Resource_ruc8d")])

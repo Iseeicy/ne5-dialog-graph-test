@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://lrspynct4m0h"]
-
-[ext_resource type="Script" path="res://nodes/change_character/change_character_handler.gd" id="1_bg30w"]
-
-[node name="ChangeCharacter" type="Node"]
-script = ExtResource("1_bg30w")

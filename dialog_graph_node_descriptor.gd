@@ -13,9 +13,9 @@ class_name DialogGraphNodeDescriptor
 ## node type. 
 @export var graph_node_scene: PackedScene = null
 
-## The scene containing the DialogRunnerActiveHandlerState that will handle
-## performing actions as a result of encountering this node type in the graph.
-@export var node_handler_scene: PackedScene = null
+## The script that will handle performing actions as a result of 
+## encountering this node type in the graph.
+@export var handler_script: Script = null
 
 ## The script that defines how this node type's data will be organized
 @export var data_script: Script = null
@@ -51,8 +51,9 @@ func instantiate_graph_node() -> DialogGraphNode:
 	return graph_node
 	
 func instantiate_handler() -> DialogRunnerActiveHandlerState:
-	var handler: DialogRunnerActiveHandlerState = node_handler_scene.instantiate()
-	handler.descriptor = self
+	var handler = DialogRunnerActiveHandlerState.new()
+	handler.set_script(handler_script)
+	handler.name = node_name
 	
 	# Add this to the list of spawned handlers, and make it
 	# remove itself when it's freed

@@ -27,8 +27,7 @@ var _current_dialog: DialogGraph = null
 func _ready():
 	# Spawn the data handlers
 	for desc in GraphNodeDB.descriptors:
-		var new_handler = desc.node_handler_scene.instantiate()
-		$Active.add_child(new_handler)
+		$Active.add_child(desc.instantiate_handler())
 	
 	super()
 	

@@ -3,12 +3,12 @@
 [ext_resource type="PackedScene" uid="uid://cnfwhuon6lt30" path="res://nodes/change_character/change_character_node.tscn" id="1_31hwl"]
 [ext_resource type="Script" path="res://dialog_graph_node_descriptor.gd" id="1_73a1t"]
 [ext_resource type="Script" path="res://nodes/change_character/change_character_node_data.gd" id="1_qk04y"]
-[ext_resource type="PackedScene" uid="uid://lrspynct4m0h" path="res://nodes/change_character/change_character_handler.tscn" id="2_quvoy"]
+[ext_resource type="Script" path="res://nodes/change_character/change_character_handler.gd" id="3_6g3wu"]
 
 [resource]
 script = ExtResource("1_73a1t")
 node_name = "ChangeCharacter"
 graph_node_scene = ExtResource("1_31hwl")
-node_handler_scene = ExtResource("2_quvoy")
+handler_script = ExtResource("3_6g3wu")
 data_script = ExtResource("1_qk04y")
 is_spawnable = true

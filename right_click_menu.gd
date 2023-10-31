@@ -49,19 +49,19 @@ func _on_id_pressed(id: int) -> void:
 		ReqType.Normal:
 			spawn_node.emit(
 				GraphNodeDB.descriptors[id], 
-				_last_req_position
+				(_last_req_position + graph_edit.scroll_offset) / graph_edit.zoom
 			)
 		ReqType.To:
 			spawn_node_to.emit(
 				GraphNodeDB.descriptors[id],
-				_last_req_position,
+				(_last_req_position + graph_edit.scroll_offset) / graph_edit.zoom,
 				_last_node_name,
 				_last_node_port
 			)
 		ReqType.From:
 			spawn_node_from.emit(
 				GraphNodeDB.descriptors[id],
-				_last_req_position,
+				(_last_req_position + graph_edit.scroll_offset) / graph_edit.zoom,
 				_last_node_name,
 				_last_node_port
 			)

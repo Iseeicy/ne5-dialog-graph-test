@@ -10,6 +10,7 @@ class_name DialogGraphEditor
 var _selected_nodes: Array[DialogGraphNode] = []
 var _preview_text_panel: Control
 var _text_reader: TextReader
+var _text_speaker: TextSpeaker
 
 #
 #	Godot Functions
@@ -17,7 +18,8 @@ var _text_reader: TextReader
 
 func _ready():
 	_preview_text_panel = $GraphEdit/PreviewTextWindow
-	_text_reader = $GraphEdit/PreviewTextWindow/MarginContainer/TextReaderLabel/TextReader
+	_text_reader = $GraphEdit/PreviewTextWindow/VBox/MarginContainer/TextReaderLabel/TextReader
+	_text_speaker = $GraphEdit/PreviewTextWindow/VBox/MarginContainer/TextReaderLabel/TextSpeaker
 	
 #
 #	Functions
@@ -224,3 +226,7 @@ func _on_graph_edit_node_deselected(node):
 
 
 
+
+
+func _on_mute_toggle_toggled(button_pressed):
+	_text_speaker.set_muted(not button_pressed)

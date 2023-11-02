@@ -8,23 +8,23 @@
 
 [sub_resource type="Resource" id="Resource_jh0qu"]
 script = ExtResource("1_ng0mn")
-position = Vector2(0, 0)
+position = Vector2(160, -220)
 
 [sub_resource type="Resource" id="Resource_5q4ki"]
 script = ExtResource("2_aupnn")
 text = Array[String](["What would you like to do?"])
-position = Vector2(200, 0)
+position = Vector2(360, -220)
 
 [sub_resource type="Resource" id="Resource_yvou1"]
 script = ExtResource("3_iik4j")
 text = ""
 choices = Array[String](["Test dialog!", "Do something else", "Try again"])
-position = Vector2(520, 0)
+position = Vector2(680, -220)
 
 [sub_resource type="Resource" id="Resource_twnpj"]
 script = ExtResource("2_aupnn")
 text = Array[String](["Good news!", "That's what ur doing. Nerd."])
-position = Vector2(1000, 80)
+position = Vector2(1160, -140)
 
 [sub_resource type="Resource" id="Resource_ou3if"]
 script = ExtResource("4_a7fly")

@@ -13,6 +13,9 @@ signal node_selected(node: DialogGraphNode)
 ## Extended for better control.
 signal node_deselected(node: DialogGraphNode)
 
+## Emitted when the data inside some node of this graph is updated.
+signal node_data_updated(node: DialogGraphNode, data: GraphNodeData)
+
 #
 #	Private Variables
 #
@@ -25,6 +28,9 @@ var _selected_nodes: Array[DialogGraphNode] = []
 
 func delete_node(node: GraphNode):
 	var connections_to_remove = []
+	
+	# Deslect the node
+	_on_graph_edit_node_deselected(node)
 	
 	# Save all connections that reference this node. conn is in the form of
 	# { from_port: 0, from: "GraphNode name 0", to_port: 1, to: "GraphNode name 1" }.
@@ -83,17 +89,17 @@ func save_to_resource(dialog_graph: DialogGraph) -> void:
 	dialog_graph.update_connections(new_connections)
 
 func load_from_resource(dialog_graph: DialogGraph) -> void:
+	# Deselect all nodes
+	for node in _selected_nodes:
+		node_deselected.emit(node)
+	_selected_nodes.clear()
+	
 	# Clean out the existing graph edit
 	$GraphEdit.clear_connections()
 	for child in $GraphEdit.get_children():
 		if not (child is DialogGraphNode):
 			continue
 		child.queue_free()
-	
-	# Deselect all nodes
-	_selected_nodes.clear()
-	for node in _selected_nodes:
-		node_deselected.emit(node)		
 	
 	if dialog_graph == null:
 		return
@@ -147,8 +153,8 @@ func _is_node_port_connected(node_name: String, port: int) -> bool:
 		return true
 	return false
 
-func _spawn_node(desc: DialogGraphNodeDescriptor) -> GraphNode:
-	var new_node: GraphNode = desc.instantiate_graph_node()
+func _spawn_node(desc: DialogGraphNodeDescriptor) -> DialogGraphNode:
+	var new_node: DialogGraphNode = desc.instantiate_graph_node()
 	
 	# Tell the node to call our classes function when it wants
 	# to be removed.
@@ -156,8 +162,14 @@ func _spawn_node(desc: DialogGraphNodeDescriptor) -> GraphNode:
 		delete_node(new_node)
 	new_node.close_request.connect(close_this_node.bind())
 	
+	# Tell the node to call our class's function when the node has
+	# it's data updated, so that we may react to this change
+	var this_node_updated = func(new_data):
+		node_data_updated.emit(new_node, new_data)
+	new_node.data_updated.connect(this_node_updated.bind())
+	
 	$GraphEdit.add_child(new_node)
-	return new_node		
+	return new_node
 
 #
 #	Signals
@@ -180,7 +192,6 @@ func _on_graph_edit_delete_nodes_request(nodes):
 	for node_name in nodes:
 		var node_to_delete = $GraphEdit.get_node(node_name as NodePath) 
 		delete_node(node_to_delete)
-		_on_graph_edit_node_deselected(node_to_delete)
 		
 func _on_graph_edit_connection_request(from_node, from_port, to_node, to_port):
 	# If the hovering node is already connected to something else, INGORE this
@@ -197,13 +208,9 @@ func _on_graph_edit_node_selected(node):
 	node_selected.emit(node)
 
 func _on_graph_edit_node_deselected(node):
+	if not node in _selected_nodes:
+		return
+	
 	node_deselected.emit(node)
 	_selected_nodes.erase(node)
-
-
-
-
-
-func _on_mute_toggle_toggled(_button_pressed):
-	# TODO
-	return
+	

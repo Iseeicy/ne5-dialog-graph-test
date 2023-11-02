@@ -48,6 +48,7 @@ func _add_new_edit() -> void:
 	var new_edit = _new_edit_control()
 	_text_edits.push_back(new_edit)
 	_casted_data.text.push_back("")
+	data_updated.emit(_casted_data)
 
 func _remove_last_edit() -> void:
 	if _text_edits.size() == 0:
@@ -56,6 +57,7 @@ func _remove_last_edit() -> void:
 	var old_edit = _text_edits.pop_back()
 	_free_edit_control(old_edit)
 	_casted_data.text.pop_back()
+	data_updated.emit(_casted_data)	
 
 func _new_edit_control() -> TextEdit:
 	var new_edit = text_edit_scene.instantiate()
@@ -84,3 +86,5 @@ func _on_add_line_button_pressed():
 	
 func _on_text_changed(index: int, new_text: String) -> void:
 	_casted_data.text[index] = new_text
+	data_updated.emit(_casted_data)
+	

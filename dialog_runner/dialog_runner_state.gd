@@ -1,3 +1,4 @@
+@tool
 extends BobboState
 class_name DialogRunnerState
 

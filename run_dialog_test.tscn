@@ -1,10 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://bs0jtg8yxg2pv"]
+[gd_scene load_steps=5 format=3 uid="uid://bs0jtg8yxg2pv"]
 
 [ext_resource type="Script" path="res://run_dialog_test.gd" id="1_yh2wp"]
 [ext_resource type="Resource" uid="uid://bqenqw1s5y0t5" path="res://test_graph.tres" id="2_2bd7m"]
 [ext_resource type="PackedScene" uid="uid://c7eoh8t1t7pq6" path="res://addons/netengine5/net.bobbo.text-window.dreams-of-being/window.tscn" id="2_46xvo"]
 [ext_resource type="PackedScene" uid="uid://bo807ocm0385q" path="res://dialog_runner/dialog_runner.tscn" id="4_870yj"]
-[ext_resource type="Script" path="res://debug_dialog_runner_state_label.gd" id="13_3wm12"]
 
 [node name="RunDialogTest" type="Control"]
 layout_mode = 3
@@ -17,10 +16,11 @@ script = ExtResource("1_yh2wp")
 dialog = ExtResource("2_2bd7m")
 
 [node name="DreamsOfBeingWindow" parent="." instance=ExtResource("2_46xvo")]
+visible = false
 layout_mode = 1
 
 [node name="TextSpeaker" parent="DreamsOfBeingWindow/VBoxContainer/ContentsContainer/DialogContents/MarginContainer/TextReaderLabel" index="2" node_paths=PackedStringArray("audio_origin_node")]
-audio_origin_node = NodePath("@Node@18050")
+audio_origin_node = NodePath("@Node@18043")
 
 [node name="DialogRunner" parent="." instance=ExtResource("4_870yj")]
 
@@ -32,14 +32,6 @@ offset_right = 671.0
 offset_bottom = 119.0
 text = "Next"
 
-[node name="DebugStateLabel" type="Label" parent="."]
-layout_mode = 0
-offset_right = 340.0
-offset_bottom = 44.0
-text = "Current state: "
-script = ExtResource("13_3wm12")
-
-[connection signal="transitioned" from="DialogRunner" to="DebugStateLabel" method="_on_dialog_runner_transitioned"]
 [connection signal="pressed" from="NextButton" to="." method="_on_next_button_pressed"]
 
 [editable path="DreamsOfBeingWindow"]

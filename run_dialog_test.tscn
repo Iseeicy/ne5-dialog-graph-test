@@ -1,13 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://bs0jtg8yxg2pv"]
+[gd_scene load_steps=6 format=3 uid="uid://bs0jtg8yxg2pv"]
 
 [ext_resource type="Script" path="res://run_dialog_test.gd" id="1_yh2wp"]
 [ext_resource type="Resource" uid="uid://bqenqw1s5y0t5" path="res://test_graph.tres" id="2_2bd7m"]
 [ext_resource type="PackedScene" uid="uid://c7eoh8t1t7pq6" path="res://addons/netengine5/net.bobbo.text-window.dreams-of-being/window.tscn" id="2_46xvo"]
-[ext_resource type="Script" path="res://dialog_runner/dialog_runner.gd" id="4_usd2x"]
-[ext_resource type="Script" path="res://dialog_runner/states/inactive.gd" id="6_6ase2"]
-[ext_resource type="Script" path="res://dialog_runner/states/active.gd" id="7_r2agy"]
+[ext_resource type="PackedScene" uid="uid://bo807ocm0385q" path="res://dialog_runner/dialog_runner.tscn" id="4_870yj"]
 [ext_resource type="Script" path="res://debug_dialog_runner_state_label.gd" id="13_3wm12"]
-[ext_resource type="Script" path="res://dialog_runner/states/unknown_handler.gd" id="13_q8aee"]
 
 [node name="RunDialogTest" type="Control"]
 layout_mode = 3
@@ -23,21 +20,9 @@ dialog = ExtResource("2_2bd7m")
 layout_mode = 1
 
 [node name="TextSpeaker" parent="DreamsOfBeingWindow/VBoxContainer/ContentsContainer/DialogContents/MarginContainer/TextReaderLabel" index="2" node_paths=PackedStringArray("audio_origin_node")]
-audio_origin_node = NodePath("@Node@22507")
+audio_origin_node = NodePath("@Node@18050")
 
-[node name="DialogRunner" type="Node" parent="." node_paths=PackedStringArray("text_window")]
-script = ExtResource("4_usd2x")
-text_window = NodePath("../DreamsOfBeingWindow")
-initial_state = NodePath("Inactive")
-
-[node name="Inactive" type="Node" parent="DialogRunner"]
-script = ExtResource("6_6ase2")
-
-[node name="Active" type="Node" parent="DialogRunner"]
-script = ExtResource("7_r2agy")
-
-[node name="Unknown" type="Node" parent="DialogRunner/Active"]
-script = ExtResource("13_q8aee")
+[node name="DialogRunner" parent="." instance=ExtResource("4_870yj")]
 
 [node name="NextButton" type="Button" parent="."]
 layout_mode = 0

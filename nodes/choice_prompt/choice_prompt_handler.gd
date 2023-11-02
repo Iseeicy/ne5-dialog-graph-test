@@ -63,10 +63,4 @@ func _on_text_window_choice_confirm(index: int, _prompt: TextWindowChoicePrompt)
 		else:
 			i += 1
 	
-	# If there are NO connections, or if our choice is out of bounds, STOP
-	if translated_index == -1:
-		runner.stop_dialog()
-		return
-	
-	# Transition to the chosen node
-	runner.go_to_node(connections[translated_index].to_id)
+	go_to_next_node(translated_index)

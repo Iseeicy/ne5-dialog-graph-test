@@ -86,8 +86,6 @@ func go_to_node(node_id: int) -> bool:
 	var node_name = GraphNodeDB.find_descriptor_for_data(data).node_name
 	
 	# If we don't have a state for the given node implementation, EXIT EARLY
-	# TODO - can we handle this more gracefully? The show must go on. Maybe we just skip if we
-	# can't handle the node?
 	var state_path = "Active/%s" % node_name
 	var found_state = get_node_or_null(state_path) as DialogRunnerState
 	if found_state == null:

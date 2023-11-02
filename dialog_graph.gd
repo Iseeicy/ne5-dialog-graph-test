@@ -115,6 +115,13 @@ func get_entry_id() -> int:
 func get_node_data(id: int) -> GraphNodeData:
 	return all_nodes[id]
 	
+func find_id_from_data(data: GraphNodeData) -> int:
+	for id in all_nodes.keys():
+		if all_nodes[id] == data:
+			return id
+			
+	return -1
+	
 ## Returns a list of all connections from or to the given node
 func get_connections_to_and_from(id: int) -> Array[NodeConnection]:
 	return connections.filter(

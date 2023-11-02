@@ -49,18 +49,12 @@ func _display_next_text() -> void:
 	
 	# If we're out of text for this node, move on
 	if index >= text_data.text.size():
-		_go_to_next_node()
+		go_to_next_node()
 		return
 	
 	# OTHERWISE - show this text!
 	text_window.show_dialog(TextWindowDialog.create_text(text_data.text[index]))
 
-func _go_to_next_node() -> void:
-	var connections = graph.get_connections_from(id)
-	if connections.size() == 0:
-		runner.stop_dialog()
-	else:
-		runner.go_to_node(connections[0].to_id)
 
 #
 #	Signals

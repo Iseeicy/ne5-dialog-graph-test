@@ -1,26 +1,24 @@
 @tool
-extends VBoxContainer
+extends Control
 class_name DialogGraphEditor
+
+#
+#	Exports
+#
+
+## Emitted when the GraphEdit selects a node. Extended for better control
+signal node_selected(node: DialogGraphNode)
+
+## Emitted when the GraphEdit deselects a node, or nodes are cleared. 
+## Extended for better control.
+signal node_deselected(node: DialogGraphNode)
 
 #
 #	Private Variables
 #
 
-## All node scenes stored by their name (String -> PackedScene)
 var _selected_nodes: Array[DialogGraphNode] = []
-var _preview_text_panel: Control
-var _text_reader: TextReader
-var _text_speaker: TextSpeaker
 
-#
-#	Godot Functions
-#
-
-func _ready():
-	_preview_text_panel = $GraphEdit/PreviewTextWindow
-	_text_reader = $GraphEdit/PreviewTextWindow/VBox/MarginContainer/TextReaderLabel/TextReader
-	_text_speaker = $GraphEdit/PreviewTextWindow/VBox/MarginContainer/TextReaderLabel/TextSpeaker
-	
 #
 #	Functions
 #
@@ -94,7 +92,8 @@ func load_from_resource(dialog_graph: DialogGraph) -> void:
 	
 	# Deselect all nodes
 	_selected_nodes.clear()
-	_update_selected_nodes()
+	for node in _selected_nodes:
+		node_deselected.emit(node)		
 	
 	if dialog_graph == null:
 		return
@@ -158,46 +157,23 @@ func _spawn_node(desc: DialogGraphNodeDescriptor) -> GraphNode:
 	new_node.close_request.connect(close_this_node.bind())
 	
 	$GraphEdit.add_child(new_node)
-	return new_node
-
-func _get_last_text_from_selected_nodes():
-	var last_text = null
-	
-	for node in _selected_nodes:
-		if not node.get_node_data() is DialogTextNodeData:
-			continue
-			
-		var data = node.get_node_data() as DialogTextNodeData
-		last_text = data.text
-	
-	return last_text
-
-func _update_selected_nodes() -> void:
-	var last_text = _get_last_text_from_selected_nodes()
-	
-	if _selected_nodes.size() > 0 and last_text != null and last_text.size() > 0:
-		_preview_text_panel.visible = true
-		_text_reader.start_reading(last_text[0])
-	else:
-		_text_reader.cancel_reading()
-		_preview_text_panel.visible = false
-		
+	return new_node		
 
 #
 #	Signals
 #
 
-func _on_add_node_spawn_node(desc: DialogGraphNodeDescriptor, position: Vector2):
+func _on_add_node_spawn_node(desc: DialogGraphNodeDescriptor, spawn_pos: Vector2):
 	var new_node: GraphNode = _spawn_node(desc)
-	new_node.position_offset = position
+	new_node.position_offset = spawn_pos
 	
-func _on_right_click_menu_spawn_node_from(desc, position, to_node, to_port):
+func _on_right_click_menu_spawn_node_from(desc, spawn_pos, _to_node, _to_port):
 	var new_node: GraphNode = _spawn_node(desc)
-	new_node.position_offset = position
+	new_node.position_offset = spawn_pos
 
-func _on_right_click_menu_spawn_node_to(desc, position, from_node, from_port):
+func _on_right_click_menu_spawn_node_to(desc, spawn_pos, from_node, from_port):
 	var new_node: GraphNode = _spawn_node(desc)
-	new_node.position_offset = position
+	new_node.position_offset = spawn_pos
 	$GraphEdit.connect_node(from_node, from_port, new_node.name, 0)	
 	
 func _on_graph_edit_delete_nodes_request(nodes):
@@ -218,15 +194,16 @@ func _on_graph_edit_disconnection_request(from_node, from_port, to_node, to_port
 
 func _on_graph_edit_node_selected(node):
 	_selected_nodes.push_back(node)
-	_update_selected_nodes()
+	node_selected.emit(node)
 
 func _on_graph_edit_node_deselected(node):
+	node_deselected.emit(node)
 	_selected_nodes.erase(node)
-	_update_selected_nodes()
 
 
 
 
 
-func _on_mute_toggle_toggled(button_pressed):
-	_text_speaker.set_muted(not button_pressed)
+func _on_mute_toggle_toggled(_button_pressed):
+	# TODO
+	return

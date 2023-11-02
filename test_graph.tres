@@ -12,7 +12,7 @@ position = Vector2(160, -220)
 
 [sub_resource type="Resource" id="Resource_5q4ki"]
 script = ExtResource("2_aupnn")
-text = Array[String](["What would you like to do?"])
+text = Array[String]([""])
 position = Vector2(360, -220)
 
 [sub_resource type="Resource" id="Resource_yvou1"]

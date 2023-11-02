@@ -171,6 +171,7 @@ func _spawn_node(desc: DialogGraphNodeDescriptor) -> DialogGraphNode:
 	$GraphEdit.add_child(new_node)
 	return new_node
 
+
 #
 #	Signals
 #

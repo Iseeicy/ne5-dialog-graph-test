@@ -13,14 +13,14 @@ position = Vector2(160, -220)
 
 [sub_resource type="Resource" id="Resource_5q4ki"]
 script = ExtResource("2_h6j17")
-text = Array[String]([""])
+text = Array[String](["What would you like to do?"])
 position = Vector2(360, -220)
 
 [sub_resource type="Resource" id="Resource_yvou1"]
 script = ExtResource("3_bya67")
 text = ""
 choices = Array[String](["Test dialog!", "Do something else", "Try again"])
-position = Vector2(680, -220)
+position = Vector2(740, -220)
 
 [sub_resource type="Resource" id="Resource_twnpj"]
 script = ExtResource("2_h6j17")

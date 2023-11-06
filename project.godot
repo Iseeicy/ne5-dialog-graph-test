@@ -11,12 +11,14 @@ config_version=5
 [application]
 
 config/name="ne5-dialog-graph-test"
+run/main_scene="res://ui_test.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
 KnowledgeDB="*res://addons/netengine5/net.bobbo.knowledge/knowledge_database.gd"
+GraphNodeDB="*res://addons/netengine5/net.bobbo.dialog-graph/autoload/graph_node_db.tscn"
 
 [dotnet]
 
@@ -24,4 +26,4 @@ project/assembly_name="ne5-dialog-graph-test"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/netengine5/net.bobbo.knowledge/plugin.cfg")
+enabled=PackedStringArray("res://addons/netengine5/net.bobbo.character/plugin.cfg", "res://addons/netengine5/net.bobbo.control-projection/plugin.cfg", "res://addons/netengine5/net.bobbo.dialog-graph/plugin.cfg", "res://addons/netengine5/net.bobbo.interactable/plugin.cfg", "res://addons/netengine5/net.bobbo.knowledge/plugin.cfg", "res://addons/netengine5/net.bobbo.mouse-look-3d/plugin.cfg", "res://addons/netengine5/net.bobbo.player-controller/plugin.cfg", "res://addons/netengine5/net.bobbo.player-model/plugin.cfg", "res://addons/netengine5/net.bobbo.resource-field/plugin.cfg", "res://addons/netengine5/net.bobbo.state-machine/plugin.cfg", "res://addons/netengine5/net.bobbo.text-reader/plugin.cfg", "res://addons/netengine5/net.bobbo.text-window/plugin.cfg")

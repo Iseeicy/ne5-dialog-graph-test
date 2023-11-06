@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=3 uid="uid://b4p7dxsgmidgx"]
+
+[ext_resource type="Script" path="res://ui_test.gd" id="1_nwuap"]
+[ext_resource type="PackedScene" uid="uid://ckoiwe8aelbix" path="res://addons/netengine5/net.bobbo.dialog-graph/editor/dialog_graph_editor.tscn" id="2_dlh4k"]
+
+[node name="UITest" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_nwuap")
+
+[node name="DialogGraphEditor" parent="." instance=ExtResource("2_dlh4k")]
+layout_mode = 1
+
+[node name="SaveButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 910.0
+offset_top = 16.0
+offset_right = 1004.0
+offset_bottom = 51.0
+text = "Save"
+
+[node name="LoadButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 1015.0
+offset_top = 16.0
+offset_right = 1109.0
+offset_bottom = 51.0
+text = "Load
+"
+
+[connection signal="pressed" from="SaveButton" to="." method="_on_save_button_pressed"]
+[connection signal="pressed" from="LoadButton" to="." method="_on_load_button_pressed"]

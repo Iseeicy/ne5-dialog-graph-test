@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="KnowledgeInteger" load_steps=2 format=3 uid="uid://bdpfsx6phiyi"]
+
+[ext_resource type="Script" path="res://addons/netengine5/net.bobbo.knowledge/knowledge_resources/knowledge_int.gd" id="1_71xa8"]
+
+[resource]
+script = ExtResource("1_71xa8")
+default_value = 0

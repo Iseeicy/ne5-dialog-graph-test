@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="CharacterDefinition" load_steps=2 format=3 uid="uid://b6fgrwd2uxiuf"]
+
+[ext_resource type="Script" path="res://addons/netengine5/net.bobbo.character/character_definition.gd" id="1_63uem"]
+
+[resource]
+script = ExtResource("1_63uem")
+name = "UNNAMED"

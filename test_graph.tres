@@ -1,65 +1,78 @@
-[gd_resource type="Resource" script_class="DialogGraph" load_steps=14 format=3 uid="uid://bqenqw1s5y0t5"]
+[gd_resource type="Resource" script_class="DialogGraph" load_steps=17 format=3 uid="uid://bqenqw1s5y0t5"]
 
-[ext_resource type="Script" path="res://nodes/entry/entry_node_data.gd" id="1_ng0mn"]
-[ext_resource type="Script" path="res://nodes/dialog_text/dialog_text_node_data.gd" id="2_aupnn"]
-[ext_resource type="Script" path="res://nodes/choice_prompt/choice_prompt_node_data.gd" id="3_iik4j"]
-[ext_resource type="Script" path="res://node_connection.gd" id="4_a7fly"]
-[ext_resource type="Script" path="res://dialog_graph.gd" id="4_b71q4"]
+[ext_resource type="Script" path="res://addons/netengine5/net.bobbo.dialog-graph/nodes/entry/entry_node_data.gd" id="1_pj14l"]
+[ext_resource type="Script" path="res://addons/netengine5/net.bobbo.dialog-graph/nodes/dialog_text/dialog_text_node_data.gd" id="2_h6j17"]
+[ext_resource type="Script" path="res://addons/netengine5/net.bobbo.dialog-graph/nodes/choice_prompt/choice_prompt_node_data.gd" id="3_bya67"]
+[ext_resource type="Script" path="res://addons/netengine5/net.bobbo.dialog-graph/nodes/change_character/change_character_node_data.gd" id="4_hdij7"]
+[ext_resource type="Script" path="res://addons/netengine5/net.bobbo.dialog-graph/node_connection.gd" id="4_hx24b"]
+[ext_resource type="Script" path="res://addons/netengine5/net.bobbo.dialog-graph/dialog_graph.gd" id="5_awita"]
 
 [sub_resource type="Resource" id="Resource_jh0qu"]
-script = ExtResource("1_ng0mn")
+script = ExtResource("1_pj14l")
 position = Vector2(160, -220)
 
 [sub_resource type="Resource" id="Resource_5q4ki"]
-script = ExtResource("2_aupnn")
+script = ExtResource("2_h6j17")
 text = Array[String]([""])
 position = Vector2(360, -220)
 
 [sub_resource type="Resource" id="Resource_yvou1"]
-script = ExtResource("3_iik4j")
+script = ExtResource("3_bya67")
 text = ""
 choices = Array[String](["Test dialog!", "Do something else", "Try again"])
 position = Vector2(680, -220)
 
 [sub_resource type="Resource" id="Resource_twnpj"]
-script = ExtResource("2_aupnn")
+script = ExtResource("2_h6j17")
 text = Array[String](["Good news!", "That's what ur doing. Nerd."])
 position = Vector2(1160, -140)
 
+[sub_resource type="Resource" id="Resource_s6gwv"]
+script = ExtResource("4_hdij7")
+position = Vector2(1577, -230)
+
 [sub_resource type="Resource" id="Resource_ou3if"]
-script = ExtResource("4_a7fly")
+script = ExtResource("4_hx24b")
 from_id = 1
 from_port = 0
 to_id = 2
 to_port = 0
 
 [sub_resource type="Resource" id="Resource_j51uy"]
-script = ExtResource("4_a7fly")
+script = ExtResource("4_hx24b")
 from_id = 2
 from_port = 0
 to_id = 3
 to_port = 0
 
 [sub_resource type="Resource" id="Resource_g5c4k"]
-script = ExtResource("4_a7fly")
+script = ExtResource("4_hx24b")
 from_id = 3
 from_port = 2
 to_id = 2
 to_port = 0
 
 [sub_resource type="Resource" id="Resource_w1d6v"]
-script = ExtResource("4_a7fly")
+script = ExtResource("4_hx24b")
 from_id = 3
 from_port = 0
 to_id = 4
 to_port = 0
 
+[sub_resource type="Resource" id="Resource_wpue6"]
+script = ExtResource("4_hx24b")
+from_id = 4
+from_port = 0
+to_id = 5
+to_port = 0
+
 [resource]
-script = ExtResource("4_b71q4")
+script = ExtResource("5_awita")
 all_nodes = {
 1: SubResource("Resource_jh0qu"),
 2: SubResource("Resource_5q4ki"),
 3: SubResource("Resource_yvou1"),
-4: SubResource("Resource_twnpj")
+4: SubResource("Resource_twnpj"),
+5: SubResource("Resource_s6gwv")
 }
-connections = Array[ExtResource("4_a7fly")]([SubResource("Resource_ou3if"), SubResource("Resource_j51uy"), SubResource("Resource_g5c4k"), SubResource("Resource_w1d6v")])
+connections = Array[ExtResource("4_hx24b")]([SubResource("Resource_ou3if"), SubResource("Resource_j51uy"), SubResource("Resource_g5c4k"), SubResource("Resource_w1d6v"), SubResource("Resource_wpue6")])

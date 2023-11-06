@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://run_dialog_test.gd" id="1_yh2wp"]
 [ext_resource type="Resource" uid="uid://bqenqw1s5y0t5" path="res://test_graph.tres" id="2_2bd7m"]
 [ext_resource type="PackedScene" uid="uid://c7eoh8t1t7pq6" path="res://addons/netengine5/net.bobbo.text-window.dreams-of-being/window.tscn" id="2_46xvo"]
-[ext_resource type="PackedScene" uid="uid://bo807ocm0385q" path="res://dialog_runner/dialog_runner.tscn" id="4_870yj"]
+[ext_resource type="PackedScene" uid="uid://bo807ocm0385q" path="res://addons/netengine5/net.bobbo.dialog-graph/dialog_runner/dialog_runner.tscn" id="4_870yj"]
 
 [node name="RunDialogTest" type="Control"]
 layout_mode = 3

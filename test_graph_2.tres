@@ -1,8 +1,8 @@
 [gd_resource type="Resource" script_class="DialogGraph" load_steps=2 format=3 uid="uid://b3ppvdtlmjk1i"]
 
-[ext_resource type="Script" path="res://dialog_graph.gd" id="2_ai1vw"]
+[ext_resource type="Script" path="res://addons/netengine5/net.bobbo.dialog-graph/dialog_graph.gd" id="2_ai1vw"]
 
 [resource]
 script = ExtResource("2_ai1vw")
 all_nodes = {}
-connections = Array[Resource("res://node_connection.gd")]([])
+connections = Array[Resource("res://addons/netengine5/net.bobbo.dialog-graph/node_connection.gd")]([])

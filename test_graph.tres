@@ -22,7 +22,7 @@ script = ExtResource("3_bya67")
 text = ""
 choices = Array[String](["Test dialog!", "Do something else", "Try again"])
 visibility_conditions = {
-1: ExtResource("4_8igm8")
+2: ExtResource("4_8igm8")
 }
 position = Vector2(740, -220)
 

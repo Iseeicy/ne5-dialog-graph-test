@@ -1,8 +1,9 @@
-[gd_resource type="Resource" script_class="DialogGraph" load_steps=17 format=3 uid="uid://bqenqw1s5y0t5"]
+[gd_resource type="Resource" script_class="DialogGraph" load_steps=18 format=3 uid="uid://bqenqw1s5y0t5"]
 
 [ext_resource type="Script" path="res://addons/netengine5/net.bobbo.dialog-graph/nodes/entry/entry_node_data.gd" id="1_pj14l"]
 [ext_resource type="Script" path="res://addons/netengine5/net.bobbo.dialog-graph/nodes/dialog_text/dialog_text_node_data.gd" id="2_h6j17"]
 [ext_resource type="Script" path="res://addons/netengine5/net.bobbo.dialog-graph/nodes/choice_prompt/choice_prompt_node_data.gd" id="3_bya67"]
+[ext_resource type="Resource" uid="uid://dfk777744hlqh" path="res://test_resources/know_bool.tres" id="4_8igm8"]
 [ext_resource type="Script" path="res://addons/netengine5/net.bobbo.dialog-graph/nodes/change_character/change_character_node_data.gd" id="4_hdij7"]
 [ext_resource type="Script" path="res://addons/netengine5/net.bobbo.dialog-graph/node_connection.gd" id="4_hx24b"]
 [ext_resource type="Script" path="res://addons/netengine5/net.bobbo.dialog-graph/dialog_graph.gd" id="5_awita"]
@@ -20,6 +21,9 @@ position = Vector2(360, -220)
 script = ExtResource("3_bya67")
 text = ""
 choices = Array[String](["Test dialog!", "Do something else", "Try again"])
+visibility_conditions = {
+1: ExtResource("4_8igm8")
+}
 position = Vector2(740, -220)
 
 [sub_resource type="Resource" id="Resource_twnpj"]
@@ -31,35 +35,35 @@ position = Vector2(1160, -140)
 script = ExtResource("4_hdij7")
 position = Vector2(1577, -230)
 
-[sub_resource type="Resource" id="Resource_ou3if"]
+[sub_resource type="Resource" id="Resource_kjl8o"]
 script = ExtResource("4_hx24b")
 from_id = 1
 from_port = 0
 to_id = 2
 to_port = 0
 
-[sub_resource type="Resource" id="Resource_j51uy"]
+[sub_resource type="Resource" id="Resource_sqkgh"]
 script = ExtResource("4_hx24b")
 from_id = 2
 from_port = 0
 to_id = 3
 to_port = 0
 
-[sub_resource type="Resource" id="Resource_g5c4k"]
+[sub_resource type="Resource" id="Resource_lraq3"]
 script = ExtResource("4_hx24b")
 from_id = 3
 from_port = 2
 to_id = 2
 to_port = 0
 
-[sub_resource type="Resource" id="Resource_w1d6v"]
+[sub_resource type="Resource" id="Resource_fa3pi"]
 script = ExtResource("4_hx24b")
 from_id = 3
 from_port = 0
 to_id = 4
 to_port = 0
 
-[sub_resource type="Resource" id="Resource_wpue6"]
+[sub_resource type="Resource" id="Resource_xkr21"]
 script = ExtResource("4_hx24b")
 from_id = 4
 from_port = 0
@@ -75,4 +79,4 @@ all_nodes = {
 4: SubResource("Resource_twnpj"),
 5: SubResource("Resource_s6gwv")
 }
-connections = Array[ExtResource("4_hx24b")]([SubResource("Resource_ou3if"), SubResource("Resource_j51uy"), SubResource("Resource_g5c4k"), SubResource("Resource_w1d6v"), SubResource("Resource_wpue6")])
+connections = Array[ExtResource("4_hx24b")]([SubResource("Resource_kjl8o"), SubResource("Resource_sqkgh"), SubResource("Resource_lraq3"), SubResource("Resource_fa3pi"), SubResource("Resource_xkr21")])

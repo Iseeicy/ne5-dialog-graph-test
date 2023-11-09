@@ -17,8 +17,8 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-KnowledgeDB="*res://addons/netengine5/net.bobbo.knowledge/autoload/knowledge_db.tscn"
 GraphNodeDB="*res://addons/netengine5/net.bobbo.dialog-graph/autoload/graph_node_db.tscn"
+KnowledgeDB="*res://addons/netengine5/net.bobbo.knowledge/autoload/knowledge_db.tscn"
 
 [dotnet]
 

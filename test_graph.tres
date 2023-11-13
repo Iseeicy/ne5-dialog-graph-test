@@ -27,14 +27,14 @@ nodes = Array[Dictionary]([{
 "_i": 3,
 "_p": Vector2(920, 80),
 "o": Array[Dictionary]([{
-"text": "Test one!",
-"visibility_condition": null
+"t": "Test one!",
+"vc": null
 }, {
-"text": "Test... TWO",
-"visibility_condition": null
+"t": "Test... TWO",
+"vc": null
 }, {
-"text": "Stuff",
-"visibility_condition": ExtResource("5_g4n3j")
+"t": "Stuff",
+"vc": ExtResource("5_g4n3j")
 }])
 }])
 connections = Array[Dictionary]([{

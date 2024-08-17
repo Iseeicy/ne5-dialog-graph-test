@@ -1,0 +1,17 @@
+{
+  "editor.formatOnSave": true,
+  "godotFormatterAndLinter.lineLength": 79,
+  "[gdscript]": {
+    "editor.defaultFormatter": "EddieDover.gdscript-formatter-linter",
+    "editor.rulers": [
+      {
+        "column": 72,
+        "color": "#494949"
+      },
+      {
+        "column": 79,
+        "color": "#363636"
+      }
+    ]
+  }
+}
